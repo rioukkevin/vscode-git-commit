@@ -1,0 +1,83 @@
+{
+    "name": "vscode-git-commit",
+    "displayName": "VSCode Git Commit",
+    "description": "Automatically generate git commit",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.42.0"
+    },
+    "publisher": "rioukkevin",
+    "license": "MIT",
+    "homepage": "https://kevin.riou.pro",
+    "bugs": {
+        "url": "https://github.com/rioukkevin/vscode-git-commit/issues"
+    },
+    "icon": "assets/logo.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rioukkevin/vscode-git-commit"
+    },
+    "keywords": [
+        "git",
+        "commit",
+        "vscode",
+        "emoji"
+    ],
+    "categories": [
+        "Other"
+    ],
+    "main": "./out/index.js",
+    "activationEvents": [
+		"onCommand:extension.setPrefix"
+	],
+    "contributes": {
+		"commands": [
+			{
+				"command": "extension.setPrefix",
+                "title": "Git prefix emote",
+                "icon": {
+                    "dark": "assets/icon_black.svg",
+                    "light": "assets/icon_light.svg"
+                }
+			}
+        ],
+        "menus": {
+            "scm/title": [
+                {
+                    "command": "extension.setPrefix",
+                    "group": "navigation",
+                    "when": "scmProvider == git"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "extension.setPrefix",
+                "key": "ctrl+alt+enter",
+                "mac": "shift+cmd+enter"
+            }
+        ]
+	},
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "eslint src --ext ts --fix",
+        "watch": "tsc -watch -p ./",
+        "build": "vsce package",
+        "local-install":"code --install-extension",
+        "pretest": "npm run compile && npm run lint"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/mocha": "^7.0.1",
+        "@types/node": "^12.11.7",
+        "@types/vscode": "^1.42.0",
+        "@typescript-eslint/eslint-plugin": "^2.18.0",
+        "@typescript-eslint/parser": "^2.18.0",
+        "eslint": "^6.8.0",
+        "glob": "^7.1.6",
+        "mocha": "^7.0.1",
+        "typescript": "^3.7.5",
+        "vscode-test": "^1.3.0"
+    }
+}
