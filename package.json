@@ -2,7 +2,7 @@
     "name": "vscode-git-commit",
     "displayName": "VSCode Git Commit",
     "description": "Automatically generate git commit",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "engines": {
         "vscode": "^1.42.0"
     },

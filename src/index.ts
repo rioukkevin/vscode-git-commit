@@ -27,12 +27,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// CMD register
 	const disposable = vscode.commands.registerCommand('extension.setPrefix', () => {
+		vscode.commands.executeCommand('workbench.view.scm');
 		vscode.window.showQuickPick(commitTypes, CommitTypeOptions).then((selected): void => {
 			if(selected){
 				vscode.window.showInputBox(messageInputType).then((value): void => {
 					const message = value || ' ';
 					setGitMessage(selected.label + ': ' + message);
-					vscode.commands.executeCommand('workbench.view.scm');
 				});
 			}else{
 				// DO nothing here
