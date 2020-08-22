@@ -28,9 +28,9 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// CMD register
 	const disposable = vscode.commands.registerCommand('extension.setPrefix', () => {
+		// vscodeGitCommit.customAlias
 		let aliases: Object[] | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('customAlias');
 		let SettingsEntry: Array<CommitType> = [];
-		console.log('ALIASES',aliases);
 		if(aliases){
 			debugger;
 			for (let i = 0; i < aliases.length; i++) {
@@ -42,7 +42,6 @@ export function activate(context: vscode.ExtensionContext) {
 				});
 			}
 		}
-		// vscodeGitCommit.customAlias
 		
 		for (let i = 0; i < commitTypes.length; i++) {
 			const el = commitTypes[i];
