@@ -31,6 +31,30 @@
 		"onCommand:extension.setPrefix"
 	],
     "contributes": {
+        "configuration": {
+            "title": "VSCode Git Commit",
+            "properties": {
+                "vscodeGitCommit.customAlias": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "Alias",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Alias name"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "Description"
+                            }
+                        }
+                    },
+                    "default": [],
+                    "description": "Add prefix to extension (copy paste emoticons from here http://www.amp-what.com/unicode/search/icon)"
+                }
+            }
+        },
 		"commands": [
 			{
 				"command": "extension.setPrefix",
@@ -64,7 +88,7 @@
         "lint": "eslint src --ext ts --fix",
         "watch": "tsc -watch -p ./",
         "build": "vsce package",
-        "local-install":"code --install-extension",
+        "local-install":"code --install-extension vscode-git-commit-0.0.2.vsix",
         "pretest": "npm run compile && npm run lint"
     },
     "devDependencies": {

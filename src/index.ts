@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { GitExtension } from './types/git';
-import {commitTypes, CommitTypeOptions} from './config/commitType';
+import './config/commitType';
+import {commitTypes, CommitTypeOptions, CommitType} from './config/commitType';
 import {messageInputType} from './config/message';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -23,12 +24,35 @@ export function activate(context: vscode.ExtensionContext) {
 	}
 
 	// Init
-	console.log('Congratulations, your extension "rioukkevin.gitprefix" is now active!');
+	console.log('Congratulations, your extension "rioukkevin.vscode-git-commit" is now active!');
 
 	// CMD register
 	const disposable = vscode.commands.registerCommand('extension.setPrefix', () => {
+		let aliases: Object[] | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('customAlias');
+		let SettingsEntry: Array<CommitType> = [];
+		console.log('ALIASES',aliases);
+		if(aliases){
+			debugger;
+			for (let i = 0; i < aliases.length; i++) {
+				const el: any = aliases[i];
+				SettingsEntry.push({
+					label: el.name,
+					key: Math.floor(Math.random() * 10000000) + '',
+					detail: el.description
+				});
+			}
+		}
+		// vscodeGitCommit.customAlias
+		
+		for (let i = 0; i < commitTypes.length; i++) {
+			const el = commitTypes[i];
+			SettingsEntry.push(el);
+		}
+
+		debugger;
+
 		vscode.commands.executeCommand('workbench.view.scm');
-		vscode.window.showQuickPick(commitTypes, CommitTypeOptions).then((selected): void => {
+		vscode.window.showQuickPick(SettingsEntry, CommitTypeOptions).then((selected): void => {
 			if(selected){
 				vscode.window.showInputBox(messageInputType).then((value): void => {
 					const message = value || ' ';

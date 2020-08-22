@@ -1,4 +1,5 @@
 import { QuickPickItem, QuickPickOptions } from 'vscode';
+import * as vscode from 'vscode';
 
 // @types
 export interface CommitType extends QuickPickItem {
@@ -8,7 +9,7 @@ export interface CommitType extends QuickPickItem {
 };
 
 // Data
-export const commitTypes: Array<CommitType> = [
+const commitTypesList: Array<CommitType> = [
   {
     label: '✨feature',
     detail: 'Select when creating new things',
@@ -45,6 +46,8 @@ export const commitTypes: Array<CommitType> = [
     key: 'other'
   }
 ];
+
+export const commitTypes: Array<CommitType> = commitTypesList;
 
 // Options
 export const CommitTypeOptions: QuickPickOptions = {
