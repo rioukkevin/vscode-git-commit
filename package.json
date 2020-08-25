@@ -2,7 +2,7 @@
     "name": "vscode-git-commit",
     "displayName": "VSCode Git Commit",
     "description": "Automatically generate git commit",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "vscode": "^1.42.0"
     },
@@ -21,7 +21,8 @@
         "git",
         "commit",
         "vscode",
-        "emoji"
+        "emoji",
+        "prefix"
     ],
     "categories": [
         "Other"
@@ -51,7 +52,19 @@
                         }
                     },
                     "default": [],
-                    "description": "Add prefix to extension (copy paste emoticons from here http://www.amp-what.com/unicode/search/icon)"
+                    "markdownDescription": "Add prefix to extension (copy paste emoticons from here [Amp What](http://www.amp-what.com/unicode/search/icon))"
+                },
+                "vscodeGitCommit.predefinedPrefix": {
+                    "type": "string",
+                    "default": "Creator Prefix",
+                    "enum": ["Creator Prefix", "Angular", "Semantic Commit Messages", "none"],
+                    "enumDescriptions": [
+                        "My own choice of prefix",
+                        "Angular commits",
+                        "Semantic commits",
+                        "No prefix predefined"
+                    ],
+                    "markdownDescription": "Select predefined prefix (Live update) (Options: Creator Prefix / [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md) / [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) / none"
                 }
             }
         },
@@ -88,7 +101,7 @@
         "lint": "eslint src --ext ts --fix",
         "watch": "tsc -watch -p ./",
         "build": "vsce package",
-        "local-install":"code --install-extension vscode-git-commit-0.0.2.vsix",
+        "local-install":"code --install-extension vscode-git-commit-0.0.3.vsix",
         "pretest": "npm run compile && npm run lint"
     },
     "devDependencies": {

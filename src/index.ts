@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { GitExtension } from './types/git';
 import './config/commitType';
-import {commitTypes, CommitTypeOptions, CommitType} from './config/commitType';
+import {commitTypesSelector, CommitTypeOptions, CommitType} from './config/commitType';
 import {messageInputType} from './config/message';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -42,10 +42,13 @@ export function activate(context: vscode.ExtensionContext) {
 				});
 			}
 		}
-		
-		for (let i = 0; i < commitTypes.length; i++) {
-			const el = commitTypes[i];
-			SettingsEntry.push(el);
+		let selectedPrefix: string | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('predefinedPrefix');
+		if(selectedPrefix && selectedPrefix !== 'none'){
+			const commitTypes = commitTypesSelector(selectedPrefix);
+			for (let i = 0; i < commitTypes.length; i++) {
+				const el = commitTypes[i];
+				SettingsEntry.push(el);
+			}
 		}
 
 		debugger;
