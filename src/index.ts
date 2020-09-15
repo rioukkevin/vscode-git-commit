@@ -20,7 +20,12 @@ export function activate(context: vscode.ExtensionContext) {
 	let repo: any = gitExtension.getAPI(1).repositories[0];
 
 	function setGitMessage(msg: string): void{
-		repo.inputBox.value = msg;
+		let mode: string | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('insertMode');
+		if(mode && mode === 'Concatenate'){
+			repo.inputBox.value += repo.inputBox.value.length > 1 ? '\n' + msg : msg;
+		}else{
+			repo.inputBox.value = msg;
+		}
 	}
 
 	// Init
@@ -28,11 +33,12 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// CMD register
 	const disposable = vscode.commands.registerCommand('extension.setPrefix', () => {
+		vscode.commands.executeCommand('workbench.view.scm');
+		
 		// vscodeGitCommit.customAlias
 		let aliases: Object[] | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('customAlias');
 		let SettingsEntry: Array<CommitType> = [];
 		if(aliases){
-			debugger;
 			for (let i = 0; i < aliases.length; i++) {
 				const el: any = aliases[i];
 				SettingsEntry.push({
@@ -51,20 +57,19 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}
 
-		debugger;
-
-		vscode.commands.executeCommand('workbench.view.scm');
-		vscode.window.showQuickPick(SettingsEntry, CommitTypeOptions).then((selected): void => {
-			if(selected){
-				vscode.window.showInputBox(messageInputType).then((value): void => {
-					const message = value || ' ';
-					setGitMessage(selected.label + ': ' + message);
-				});
-			}else{
-				// DO nothing here
-			}
-			// TODO call text message
-		});
+		setTimeout(() => {
+			vscode.window.showQuickPick(SettingsEntry, CommitTypeOptions).then((selected): void => {
+				if(selected){
+					vscode.window.showInputBox(messageInputType).then((value): void => {
+						const message = value || ' ';
+						setGitMessage(selected.label + ': ' + message);
+					});
+				}else{
+					// DO nothing here
+				}
+				// TODO call text message
+			});
+		}, 200);
 	});
 
 	context.subscriptions.push(disposable);
