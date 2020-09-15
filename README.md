@@ -27,7 +27,24 @@ Edit this setting, it open it in the json file.
 With autocompletion, you can add prefix like this:   
 ![customPrefix](./assets/screens/customPrefix.png)
 
+## You don't love my prefix ? No problem
+
+In vscode settings, search for `VScode git commit`, there is one setting called **Vscode Git Commit: Predefined Prefix**. 
+
+Here you can choose which prefix set you want. Available prefix sets are:
+- Angular
+- Semantic prefix
+- My own prefix
+- None
+
+By choosing none, you have to define your prefix with setting **Vscode Git Commit: Custom Alias**
+
+If you want me to add more prefix set, please create an issue with source of this set.
+
 ## Changelog
+
+**0.0.3** (*08-25-2020*): 
+✨feature: V0.0.3 add prefix sets
 
 **0.0.2** (*08-23-2020*): 
 ✨feature: Add custom prefix setting
@@ -39,6 +56,8 @@ Initial release
 ## Todo
 
 - Add abilities to create custom message format
+- Add abilities to create custom prefix from prefix selector
+- Add a mode setting to choose if message is concatenate to existing or replace existing
 
 ## The end
 
