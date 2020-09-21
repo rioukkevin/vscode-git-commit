@@ -4,6 +4,10 @@ VSCode git commit is a VSCode extension to create nice commit message with emoji
 
 > That's the first release :P 
 
+![version](https://vsmarketplacebadge.apphb.com/version-short/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
+![install](https://vsmarketplacebadge.apphb.com/installs/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
+![rating](https://vsmarketplacebadge.apphb.com/rating-star/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
+
 ## How to use it ?
 
 1. You have to execute the extension command with `ctrl+alt+enter` (`cmd+shift+enter` on Mac) or `click` on the icon in SouceControl Panel here   
@@ -49,23 +53,24 @@ If you want me to add more prefix set, please create an issue with source of thi
 
 ## Changelog
 
-**1.0.0** (*09-21-2020*): 
-> First Release, I've done it !!
-✨feature: Replace icon with outlined
+**1.0.0** (*09-21-2020*):     
+> First Release, I've done it !!       
 
-**0.0.4** (*09-15-2020*): 
-✨feature: add a mode to concatenate message with existing or replace existing
-🐞fix: focus on quickPick not on scm input box when triggering extension
+✨feature: Replace icon with outlined    
 
-**0.0.3** (*08-25-2020*): 
-✨feature: V0.0.3 add prefix sets
+**0.0.4** (*09-15-2020*):    
+✨feature: add a mode to concatenate message with existing or replace existing    
+🐞fix: focus on quickPick not on scm input box when triggering extension    
 
-**0.0.2** (*08-23-2020*): 
-✨feature: Add custom prefix setting
-🐞fix: Open SCM view when prefix selector is opened, not at the end of process
+**0.0.3** (*08-25-2020*):     
+✨feature: V0.0.3 add prefix sets     
 
-**0.0.1** (*08-18-2020*): 
-Initial release 
+**0.0.2** (*08-23-2020*):     
+✨feature: Add custom prefix setting     
+🐞fix: Open SCM view when prefix selector is opened, not at the end of process     
+
+**0.0.1** (*08-18-2020*):     
+Initial release     
 
 ## Todo
 
