@@ -4,9 +4,6 @@ node_modules
 package-lock.json
 assets/logo.pdn
 assets/logoold.png
-vscode-git-commit-0.0.1.vsix
 yarn.lock
-/vscode-git-commit-0.0.2.vsix
-/vscode-git-commit-0.0.3.vsix
-/vscode-git-commit-0.0.4.vsix
+/vscode-git-commit-*.vsix
 /yarn-error.log

@@ -1,8 +1,8 @@
-# VSCode Git Commit (BETA)
+# VSCode Git Commit Message
 
 VSCode git commit is a VSCode extension to create nice commit message with emoji and prefix.
 
-> This is a beta version, more features are coming
+> That's the first release :P 
 
 ## How to use it ?
 
@@ -48,6 +48,10 @@ By choosing none, you have to define your prefix with setting **Vscode Git Commi
 If you want me to add more prefix set, please create an issue with source of this set.
 
 ## Changelog
+
+**1.0.0** (*09-21-2020*): 
+> First Release, I've done it !!
+✨feature: Replace icon with outlined
 
 **0.0.4** (*09-15-2020*): 
 ✨feature: add a mode to concatenate message with existing or replace existing

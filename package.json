@@ -1,8 +1,8 @@
 {
     "name": "vscode-git-commit",
-    "displayName": "VSCode Git Commit",
-    "description": "Automatically generate git commit",
-    "version": "0.0.4",
+    "displayName": "VSCode Git Commit Message",
+    "description": "Automatically generate git commit message with prefix",
+    "version": "1.0.0",
     "engines": {
         "vscode": "^1.42.0"
     },
@@ -22,7 +22,15 @@
         "commit",
         "vscode",
         "emoji",
-        "prefix"
+        "prefix",
+        "pull",
+        "push",
+        "scm",
+        "github",
+        "gitlab",
+        "message",
+        "wink",
+        "groot"
     ],
     "categories": [
         "Other"
@@ -111,7 +119,7 @@
         "lint": "eslint src --ext ts --fix",
         "watch": "tsc -watch -p ./",
         "build": "vsce package",
-        "local-install":"code --install-extension vscode-git-commit-0.0.4.vsix",
+        "local-install":"code --install-extension vscode-git-commit-1.0.0.vsix",
         "pretest": "npm run compile && npm run lint"
     },
     "devDependencies": {
