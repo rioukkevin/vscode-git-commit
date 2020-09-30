@@ -53,6 +53,10 @@ If you want me to add more prefix set, please create an issue with source of thi
 
 ## Changelog
 
+**1.0.1** (*09-30-2020*):     
+✨feature: On demand, add based commitizen prefix for alpha8    
+🔵other: Change default mode to concatenate settings   
+
 **1.0.0** (*09-21-2020*):     
 > First Release, I've done it !!       
 
