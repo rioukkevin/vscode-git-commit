@@ -2,7 +2,7 @@
     "name": "vscode-git-commit",
     "displayName": "VSCode Git Commit Message",
     "description": "Automatically generate git commit message with prefix",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "engines": {
         "vscode": "^1.42.0"
     },
@@ -30,7 +30,8 @@
         "gitlab",
         "message",
         "wink",
-        "groot"
+        "groot",
+        "commitizen"
     ],
     "categories": [
         "Other"
@@ -65,14 +66,15 @@
                 "vscodeGitCommit.predefinedPrefix": {
                     "type": "string",
                     "default": "Creator Prefix",
-                    "enum": ["Creator Prefix", "Angular", "Semantic Commit Messages", "none"],
+                    "enum": ["Creator Prefix", "Angular", "Semantic Commit Messages", "Alpha8", "none"],
                     "enumDescriptions": [
                         "My own choice of prefix",
                         "Angular commits",
                         "Semantic commits",
+                        "Alpha8, commitizen based commits",
                         "No prefix predefined"
                     ],
-                    "markdownDescription": "Select predefined prefix (Live update) (Options: Creator Prefix / [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md) / [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) / none"
+                    "markdownDescription": "Select predefined prefix (Live update) (Options: Creator Prefix / [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md) / [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) / [Alpha8](https://github.com/commitizen-tools/commitizen/blob/master/commitizen/cz/conventional_commits/conventional_commits.py) / none"
                 },
                 "vscodeGitCommit.insertMode": {
                     "type": "string",

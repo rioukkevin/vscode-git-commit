@@ -143,10 +143,60 @@ const commitTypesSemantic: Array<CommitType> = [
   }
 ];
 
+
+const commitTypesAlpha8: Array<CommitType> = [
+  {
+    label: '✨feat',
+    detail: 'A new feature. Correlates with MINOR in SemVer',
+    key: 'feature'
+  },
+  {
+    label: '🐞fix',
+    detail: 'A bug fix. Correlates with PATCH in SemVer',
+    key: 'fix'
+  },
+  {
+    label: '📄docs',
+    detail: 'Documentation only changes',
+    key: 'docs'
+  },
+  {
+    label: '🌈style',
+    detail: 'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)',
+    key: 'style'
+  },
+  {
+    label: '⚙️refactor',
+    detail: 'A code change that neither fixes a bug nor adds a feature',
+    key: 'refactor'
+  },
+  {
+    label: '🕜perf',
+    detail: 'A code change that improves performance',
+    key: 'perf'
+  },
+  {
+    label: '🧪test',
+    detail: 'Adding missing or correcting existing tests',
+    key: 'test'
+  },
+  {
+    label: '🏗️build',
+    detail: 'Changes that affect the build system or external dependencies (example scopes: pip, docker, npm)',
+    key: 'build'
+  },
+  {
+    label: '🤹ci',
+    detail: 'Changes to our CI configuration files and scripts (example scopes: GitLabCI)',
+    key: 'ci'
+  }
+];
+
 // Exports
 export const commitTypesSelector = (name: string): Array<CommitType> => {
   if(name === 'Angular') {return commitTypesAngular;}
   if(name === 'Semantic Commit Messages') {return commitTypesSemantic;}
+  if(name === 'Alpha8') {return commitTypesAlpha8;}
   else {return commitTypesKeke;}
 };
 
