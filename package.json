@@ -78,7 +78,7 @@
                 },
                 "vscodeGitCommit.insertMode": {
                     "type": "string",
-                    "default": "Replace",
+                    "default": "Concatenate",
                     "enum": ["Replace", "Concatenate"],
                     "enumDescriptions": [
                         "Replace existing commit message on new",
