@@ -1,76 +1,39 @@
-import * as vscode from 'vscode';
-import { GitExtension } from './types/git';
-import './config/commitType';
-import {commitTypesSelector, CommitTypeOptions, CommitType} from './config/commitType';
-import {messageInputType} from './config/message';
+import * as vscode from "vscode";
+import "./config/commitType";
+import {
+  commitTypesSelector,
+  CommitTypeOptions,
+  CommitType,
+} from "./config/commitType";
+import {
+  getQuickTextOptions,
+  useQuickPick,
+  useQuickText,
+} from "./utils/actions";
+import { getAliases, getPreset } from "./utils/settings";
+import { getRepo, setGitMessage } from "./utils/git";
+import { execute } from "./scripts/workflow";
 
 export function activate(context: vscode.ExtensionContext) {
-	// GIT
-	function getGitExtension() {
-		const vscodeGit = vscode.extensions.getExtension<GitExtension>('vscode.git');
-		const gitExtension = vscodeGit && vscodeGit.exports;
-		return gitExtension;
-	}
+  // GIT
+  let repo: any = getRepo();
 
-	const gitExtension = getGitExtension();
-	if (!gitExtension?.enabled) {
-		vscode.window.showErrorMessage('Git extensions are not currently enabled, please try again after enabled!');
-		return false;
-	}
-	let repo: any = gitExtension.getAPI(1).repositories[0];
+  // Init
+  console.log(
+    'Congratulations, your extension "rioukkevin.vscode-git-commit" is now active!'
+  );
 
-	function setGitMessage(msg: string): void{
-		let mode: string | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('insertMode');
-		if(mode && mode === 'Concatenate'){
-			repo.inputBox.value += repo.inputBox.value.length > 1 ? '\n' + msg : msg;
-		}else{
-			repo.inputBox.value = msg;
-		}
-	}
+  // CMD register
+  const disposable = vscode.commands.registerCommand(
+    "extension.setPrefix",
+    () => {
+      vscode.commands.executeCommand("workbench.view.scm");
 
-	// Init
-	console.log('Congratulations, your extension "rioukkevin.vscode-git-commit" is now active!');
+      setTimeout(async () => {
+        execute(repo);
+      }, 200);
+    }
+  );
 
-	// CMD register
-	const disposable = vscode.commands.registerCommand('extension.setPrefix', () => {
-		vscode.commands.executeCommand('workbench.view.scm');
-		
-		// vscodeGitCommit.customAlias
-		let aliases: Object[] | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('customAlias');
-		let SettingsEntry: Array<CommitType> = [];
-		if(aliases){
-			for (let i = 0; i < aliases.length; i++) {
-				const el: any = aliases[i];
-				SettingsEntry.push({
-					label: el.name,
-					key: Math.floor(Math.random() * 10000000) + '',
-					detail: el.description
-				});
-			}
-		}
-		let selectedPrefix: string | undefined = vscode.workspace.getConfiguration('vscodeGitCommit').get('predefinedPrefix');
-		if(selectedPrefix && selectedPrefix !== 'none'){
-			const commitTypes = commitTypesSelector(selectedPrefix);
-			for (let i = 0; i < commitTypes.length; i++) {
-				const el = commitTypes[i];
-				SettingsEntry.push(el);
-			}
-		}
-
-		setTimeout(() => {
-			vscode.window.showQuickPick(SettingsEntry, CommitTypeOptions).then((selected): void => {
-				if(selected){
-					vscode.window.showInputBox(messageInputType).then((value): void => {
-						const message = value || ' ';
-						setGitMessage(selected.label + ': ' + message);
-					});
-				}else{
-					// DO nothing here
-				}
-				// TODO call text message
-			});
-		}, 200);
-	});
-
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable);
 }
