@@ -6,7 +6,6 @@ import {
 } from "../utils/actions";
 import { CommitType, commitTypesSelector } from "../config/commitType";
 import { setGitMessage } from "../utils/git";
-// import { IAction, IWorkflow } from "./types/action.d";
 
 import { getAliases, getMode, getPreset, getTemplate } from "../utils/settings";
 import {
@@ -19,7 +18,6 @@ export const execute = async (repo: any) => {
   // Init
   const settingsTemplate = getTemplate();
   const settingsAliases = getAliases();
-  const settingsMode = getMode();
   const settingsPreset = getPreset();
 
   // Data from params
