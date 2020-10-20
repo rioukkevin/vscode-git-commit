@@ -3,16 +3,16 @@ import {
   getQuickTextOptions,
   useQuickPick,
   useQuickText,
-} from "../utils/actions";
-import { CommitType, commitTypesSelector } from "../config/commitType";
-import { setGitMessage } from "../utils/git";
+} from '../utils/actions';
+import { CommitType, commitTypesSelector } from '../config/commitType';
+import { setGitMessage } from '../utils/git';
 
-import { getAliases, getMode, getPreset, getTemplate } from "../utils/settings";
+import { getAliases, getMode, getPreset, getTemplate } from '../utils/settings';
 import {
   templateParser,
   templateSerialize,
   TVariable,
-} from "../utils/template";
+} from '../utils/template';
 
 export const execute = async (repo: any) => {
   // Init
@@ -22,7 +22,7 @@ export const execute = async (repo: any) => {
 
   // Data from params
   let prefixEntries: Array<CommitType> = settingsAliases;
-  if (settingsPreset && settingsPreset !== "none") {
+  if (settingsPreset && settingsPreset !== 'none') {
     const commitTypes = commitTypesSelector(settingsPreset);
     for (let i = 0; i < commitTypes.length; i++) {
       const el = commitTypes[i];
@@ -30,14 +30,14 @@ export const execute = async (repo: any) => {
     }
   }
 
-  const variables = templateParser(settingsTemplate || "{prefix}: {message}");
+  const variables = templateParser(settingsTemplate || '{prefix}: {message}');
 
   // Workflow messages
   let keys: TVariable[] = [];
 
   let value = await useQuickPick(getQuickPickOptions(), prefixEntries);
   keys.push({
-    key: "prefix",
+    key: 'prefix',
     value: value,
   });
 
@@ -52,6 +52,6 @@ export const execute = async (repo: any) => {
 
   setGitMessage(
     repo,
-    templateSerialize(settingsTemplate || "{prefix}: {message}", keys)
+    templateSerialize(settingsTemplate || '{prefix}: {message}', keys)
   );
 };

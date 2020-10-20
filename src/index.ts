@@ -1,18 +1,18 @@
-import * as vscode from "vscode";
-import "./config/commitType";
+import * as vscode from 'vscode';
+import './config/commitType';
 import {
   commitTypesSelector,
   CommitTypeOptions,
   CommitType,
-} from "./config/commitType";
+} from './config/commitType';
 import {
   getQuickTextOptions,
   useQuickPick,
   useQuickText,
-} from "./utils/actions";
-import { getAliases, getPreset } from "./utils/settings";
-import { getRepo, setGitMessage } from "./utils/git";
-import { execute } from "./scripts/workflow";
+} from './utils/actions';
+import { getAliases, getPreset } from './utils/settings';
+import { getRepo, setGitMessage } from './utils/git';
+import { execute } from './scripts/workflow';
 
 export function activate(context: vscode.ExtensionContext) {
   // GIT
@@ -25,9 +25,9 @@ export function activate(context: vscode.ExtensionContext) {
 
   // CMD register
   const disposable = vscode.commands.registerCommand(
-    "extension.setPrefix",
+    'extension.setPrefix',
     () => {
-      vscode.commands.executeCommand("workbench.view.scm");
+      vscode.commands.executeCommand('workbench.view.scm');
 
       setTimeout(async () => {
         execute(repo);
