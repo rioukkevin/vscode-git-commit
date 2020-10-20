@@ -84,6 +84,9 @@ You can create as many lines as you want and as many variables as you want.
 
 ## Changelog
 
+**1.1.1** (_10-20-2020_): 
+🐞fix: Update icon (cf: issues [#4](https://github.com/rioukkevin/vscode-git-commit/issues/4))
+
 **1.1.0** (_10-12-2020_):  
 ✨feat(workflow): Add abilities to create custom message format using simple brackets in settings, see doc  
 ⚙️refactor(global): Refacto on major part of the code  
