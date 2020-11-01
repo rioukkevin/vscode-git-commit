@@ -43,15 +43,21 @@ export const execute = async (repo: any) => {
 
   for (let i = 1; i < variables.length; i++) {
     const key = variables[i];
-    value = await useQuickText(getQuickTextOptions(`Please enter a '${key}'`));
-    keys.push({
-      key: key,
-      value: value,
-    });
+    try {
+      value = await useQuickText(getQuickTextOptions(`Please enter a '${key}'`));
+      keys.push({
+        key: key,
+        value: value,
+      });      
+    } catch (error) {
+      console.log('Error', error);
+    }
   }
 
-  setGitMessage(
-    repo,
-    templateSerialize(settingsTemplate || '{prefix}: {message}', keys)
-  );
+  if(keys.length >= variables.length - 1) {
+    setGitMessage(
+      repo,
+      templateSerialize(settingsTemplate || '{ prefix}: {message}', keys)
+    );
+  }
 };

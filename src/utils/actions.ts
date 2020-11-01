@@ -12,7 +12,7 @@ export const useQuickPick = async (
   values: IValues[]
 ): Promise<string> => {
   const value = await vscode.window.showQuickPick(values, params);
-  if (!value) {return '';}
+  if (!value) {throw new Error('Empty');}
   return value.label;
 };
 
@@ -20,7 +20,7 @@ export const useQuickText = async (
   params: InputBoxOptions
 ): Promise<string> => {
   const message = await vscode.window.showInputBox(params);
-  if (!message) {return '';}
+  if (!message) {throw new Error('Empty');}
   return message;
 };
 
