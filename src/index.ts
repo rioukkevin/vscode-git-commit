@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // CMD register
   const disposable = vscode.commands.registerCommand(
-    'extension.setPrefix',
+    'vscodeGitCommit.setMessage',
     () => {
       vscode.commands.executeCommand('workbench.view.scm');
 

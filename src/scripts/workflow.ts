@@ -54,7 +54,7 @@ export const execute = async (repo: any) => {
     }
   }
 
-  if(keys.length >= variables.length - 1) {
+  if(keys.length >= variables.length) {
     setGitMessage(
       repo,
       templateSerialize(settingsTemplate || '{ prefix}: {message}', keys)

@@ -38,7 +38,7 @@
   ],
   "main": "./out/index.js",
   "activationEvents": [
-    "onCommand:extension.setPrefix"
+    "onCommand:vscodeGitCommit.setMessage"
   ],
   "contributes": {
     "configuration": {
@@ -110,7 +110,7 @@
     },
     "commands": [
       {
-        "command": "extension.setPrefix",
+        "command": "vscodeGitCommit.setMessage",
         "title": "Git prefix emote",
         "icon": {
           "dark": "assets/icon_black.svg",
@@ -121,7 +121,7 @@
     "menus": {
       "scm/title": [
         {
-          "command": "extension.setPrefix",
+          "command": "vscodeGitCommit.setMessage",
           "group": "navigation",
           "when": "scmProvider == git"
         }
@@ -129,14 +129,14 @@
     },
     "keybindings": [
       {
-        "command": "extension.setPrefix",
+        "command": "vscodeGitCommit.setMessage",
         "key": "ctrl+alt+enter",
         "mac": "shift+cmd+enter"
       }
     ]
   },
   "scripts": {
-    "extension:prepublish": "npm run compile",
+    "extension:prepublish": "npm run extension:compile",
     "extension:compile": "tsc -p ./",
     "extension:lint": "eslint src --ext ts --fix",
     "extension:watch": "tsc -watch -p ./",
