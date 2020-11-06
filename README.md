@@ -84,6 +84,9 @@ You can create as many lines as you want and as many variables as you want.
 
 ## Changelog
 
+**1.1.4** (_11-06-2020_):    
+✨feature: Handle multi repo case
+
 **1.1.3** (_11-06-2020_):    
 🐞fix: Update icon (cf: issues [#4](https://github.com/rioukkevin/vscode-git-commit/issues/4))   
 🐞fix: Handle cancel action when typing variables (cf: issues [#5](https://github.com/rioukkevin/vscode-git-commit/issues/5))   
