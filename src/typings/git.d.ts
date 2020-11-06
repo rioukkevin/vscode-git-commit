@@ -119,6 +119,7 @@ export interface LogOptions {
 }
 
 export interface Repository {
+  readonly  _repository: any;
   readonly rootUri: Uri;
   readonly inputBox: InputBox;
   readonly state: RepositoryState;

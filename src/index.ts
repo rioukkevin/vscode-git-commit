@@ -16,7 +16,6 @@ import { execute } from './scripts/workflow';
 
 export function activate(context: vscode.ExtensionContext) {
   // GIT
-  let repo: any = getRepo();
 
   // Init
   console.log(
@@ -26,9 +25,10 @@ export function activate(context: vscode.ExtensionContext) {
   // CMD register
   const disposable = vscode.commands.registerCommand(
     'vscodeGitCommit.setMessage',
-    () => {
+    (params) => {
       vscode.commands.executeCommand('workbench.view.scm');
-
+      const repoUri = params?._quickDiffProvider?.repository?.repositoryRoot || undefined;
+      let repo: any = getRepo(repoUri);
       setTimeout(async () => {
         execute(repo);
       }, 200);

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { getMode } from './settings';
-import { GitExtension } from '../typings/git';
+import { GitExtension, Repository } from '../typings/git';
 
 function getGitExtension() {
   const vscodeGit = vscode.extensions.getExtension<GitExtension>('vscode.git');
@@ -8,7 +8,7 @@ function getGitExtension() {
   return gitExtension;
 }
 
-export const getRepo = (): any => {
+export const getRepo = (repoUri: string): any => {
   const gitExtension = getGitExtension();
   if (!gitExtension?.enabled) {
     vscode.window.showErrorMessage(
@@ -16,8 +16,9 @@ export const getRepo = (): any => {
     );
     return false;
   }
-  let repo: any = gitExtension.getAPI(1).repositories[0];
-  return repo;
+  let repos: Repository[] = gitExtension.getAPI(1).repositories;
+  const repo = repos.find(e => e._repository.repository.repositoryRoot === repoUri);
+  return repo || repos[0];
 };
 
 export const setGitMessage = (repo: any, msg: string): void => {
