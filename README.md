@@ -10,38 +10,27 @@ VSCode git commit is a VSCode extension to create nice commit message with emoji
 
 ## How to use it ?
 
-1. You have to execute the extension command with `ctrl+alt+enter` (`cmd+shift+enter` on Mac) or `click` on the icon in SouceControl Panel here  
-   ![logo](./assets/screens/logo.png)
+Use `ctrl+alt+enter` (`cmd+shift+enter` on Mac) or `click` on the icon in SouceControl
+<img src="./assets/icon_black.svg" width="20">
 
-2. Choose wich prefix you want
-   ![prefix](./assets/screens/list.png)
+![howto](./assets/screens/howto.gif)
 
-3. Complete with your commit message
-   ![message](./assets/screens/message.png)
+## Settings
 
-4. Now you're done  
-   ![scm](./assets/screens/scm.png)
+### 1. **Erase previous commit on new one** (`vscodeGitCommit.insertMode`)
 
-## Hmm wait, when I choose a second preset it erase the first one
+![scm](./assets/screens/exampleInsertmodeSettings.png)
 
-Yeah I know, I add a settings to avoid this. In vscode settings, search for `VScode git commit`, there is one setting called **Vscode Git Commit: Insert Mode**.
+Options:
 
-Here you can choose to concatenate new messages or erase existing one by the new
+- Concatenate
+- Replace
 
-## How to add custom prefix ?
+### 2. **Change default prefix with an other preset** (`vscodeGitCommit.predefinedPrefix`)
 
-In vscode settings, search for `VScode git commit`, there is one setting called **Vscode Git Commit: Custom Alias**.
+![scm](./assets/screens/examplePresetSettings.png)
 
-Edit this setting, it open it in the json file.
-
-With autocompletion, you can add prefix like this:  
-![customPrefix](./assets/screens/customPrefix.png)
-
-## You don't love my prefix ? No problem
-
-In vscode settings, search for `VScode git commit`, there is one setting called **Vscode Git Commit: Predefined Prefix**.
-
-Here you can choose which prefix set you want. Available prefix set are:
+Options:
 
 - Angular
 - Semantic prefix
@@ -49,50 +38,39 @@ Here you can choose which prefix set you want. Available prefix set are:
 - Alpha8
 - None
 
-By choosing none, you have to define your prefix with setting **Vscode Git Commit: Custom Alias**
+> `None` Disable all predefined prefix for next setting **V**
 
-If you want me to add more prefix set, please create an issue with source of this set.
+### 3. **Add my own prefix set **(`vscodeGitCommit.customAlias`)
 
-## Custom message format
+![scm](./assets/screens/exampleAliasesSettings.png)
 
-Now you can create your custom message format using brackets to define variables
-You can create as many variables as you want, an input box will be displayed for each ones.
-One variable cannot be suppress, the variable named `prefix` will display a quickPick based on prefix set choosen.
+> Setting auto-completion is enabled
 
-It's better with an example:
+> Custom aliases are displayed first
 
-Add a scope to the default message
+### 4. **Create own template message** (`vscodeGitCommit.messageTemplate`)
 
-```json
-// settings.json
-{
-  // ...
-  "vscodeGitCommit.messageTemplate": ["{prefix}({scope}): {message}"]
-  // ...
-}
-```
+![scm](./assets/screens/exampleTemplateSettings.png)
 
-When used, the extension detect 3 variables
+> Each entry of the array is a new line in message template
 
-- classic 'prefix'
-- a 'scope'
-- a 'message'
+> Variables are automatically prompted
 
-You can create as many lines as you want and as many variables as you want.
+> `{prefix}` variable display a selector prompt
 
-> the default format is `{prefix}: {message}`
+> You can create as many lines as you want and as many variables as you want.
 
 ## Changelog
 
-**1.1.4** (_11-06-2020_):    
+**1.1.4** (_11-06-2020_):  
 ✨feature: Handle multi repo case
 
-**1.1.3** (_11-06-2020_):    
-🐞fix: Update icon (cf: issues [#4](https://github.com/rioukkevin/vscode-git-commit/issues/4))   
-🐞fix: Handle cancel action when typing variables (cf: issues [#5](https://github.com/rioukkevin/vscode-git-commit/issues/5))   
-⚙️refactor: Refacto on extension command name     
+**1.1.3** (_11-06-2020_):  
+🐞fix: Update icon (cf: issues [#4](https://github.com/rioukkevin/vscode-git-commit/issues/4))  
+🐞fix: Handle cancel action when typing variables (cf: issues [#5](https://github.com/rioukkevin/vscode-git-commit/issues/5))  
+⚙️refactor: Refacto on extension command name
 
-**1.1.1** (_10-20-2020_): 
+**1.1.1** (_10-20-2020_):
 🐞fix: Update icon (cf: issues [#4](https://github.com/rioukkevin/vscode-git-commit/issues/4))
 
 **1.1.0** (_10-12-2020_):  
