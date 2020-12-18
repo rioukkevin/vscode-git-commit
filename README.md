@@ -11,7 +11,8 @@ VSCode git commit is a VSCode extension to create nice commit message with emoji
 ## How to use it ?
 
 Use `ctrl+alt+enter` (`cmd+shift+enter` on Mac) or `click` on the icon in SouceControl
-<img src="./assets/icon_black.svg" width="20">
+<img src="./assets/icon_black.png" width="20">
+<img src="./assets/icon_light.png" width="20">
 
 ![howto](./assets/screens/howto.gif)
 
