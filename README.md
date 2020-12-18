@@ -62,6 +62,9 @@ Options:
 
 ## Changelog
 
+**1.1.5** (_12-18-2020_):  
+📄docs (docs): update docs with animated gif
+
 **1.1.4** (_11-06-2020_):  
 ✨feature: Handle multi repo case
 

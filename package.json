@@ -2,7 +2,7 @@
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
   "description": "Automatically generate git commit message with prefix",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "engines": {
     "vscode": "^1.42.0"
   },
@@ -31,7 +31,8 @@
     "message",
     "wink",
     "groot",
-    "commitizen"
+    "commitizen",
+    "custom"
   ],
   "categories": [
     "SCM Providers",
