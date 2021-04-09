@@ -17,11 +17,13 @@ export const getRepo = (repoUri: string): any => {
     return false;
   }
   let repos: Repository[] = gitExtension.getAPI(1).repositories;
-  const repo = repos.find(e => e._repository.repository.repositoryRoot === repoUri);
+  const repo = repos.find(
+    (e) => e._repository.repository.repositoryRoot === repoUri
+  );
   return repo || repos[0];
 };
 
-export const setGitMessage = (repo: any, msg: string): void => {
+export const setGitMessage = (repo: Repository, msg: string): void => {
   let mode: string | undefined = getMode();
   if (mode && mode === 'Concatenate') {
     repo.inputBox.value += repo.inputBox.value.length > 1 ? '\n' + msg : msg;

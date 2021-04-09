@@ -9,20 +9,38 @@
   // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
   "typescript.tsc.autoDetect": "off",
 
-  "vscodeGitCommit.messageTemplate": ["{prefix} ({scope}): {message}"],
+  // "vscodeGitCommit.messageTemplate": ["{prefix} ({scope}): {message}"],
 
+  // "vscodeGitCommit.insertMode": "Concatenate",
+
+  // "vscodeGitCommit.predefinedPrefix": "Alpha8",
+
+  // "vscodeGitCommit.customAlias": [
+  //   {
+  //     "name": "🚀 Space",
+  //     "description": "Choose when pushing in canary at SpaceX"
+  //   },
+  //   {
+  //     "name": "😝 Easter-Egg",
+  //     "description": "Use when comitting easter-eggs for example"
+  //   }
+  // ]
   "vscodeGitCommit.insertMode": "Concatenate",
 
-  "vscodeGitCommit.predefinedPrefix": "Alpha8",
+  "vscodeGitCommit.variables": {
+    "prefix": "alpha8",
+    "aliases": [
+      {
+        "label": "🚀 Space",
+        "key": "5993179",
+        "detail": "Choose when pushing in canary at SpaceX"
+      },
+      {
+        "label": "😝 Easter-Egg",
+        "key": "4862938"
+      }
+    ]
+  },
 
-  "vscodeGitCommit.customAlias": [
-    {
-      "name": "🚀 Space",
-      "description": "Choose when pushing in canary at SpaceX"
-    },
-    {
-      "name": "😝 Easter-Egg",
-      "description": "Use when comitting easter-eggs for example"
-    }
-  ]
+  "vscodeGitCommit.template": ["{prefix} ({scope}): {message}"]
 }

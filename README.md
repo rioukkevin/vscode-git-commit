@@ -20,48 +20,43 @@ Use `ctrl+alt+enter` (`cmd+shift+enter` on Mac) or `click` on the icon in SouceC
 
 ### 1. **Erase previous commit on new one** (`vscodeGitCommit.insertMode`)
 
-![scm](./assets/screens/exampleInsertmodeSettings.png)
+![scm](./assets/settings/insertMode.png)
 
 Options:
 
 - Concatenate
 - Replace
 
-### 2. **Change default prefix with an other preset** (`vscodeGitCommit.predefinedPrefix`)
+### 2. **Create my own template message** (`vscodeGitCommit.template`)
 
-![scm](./assets/screens/examplePresetSettings.png)
-
-Options:
-
-- Angular
-- Semantic prefix
-- My own prefix
-- Alpha8
-- None
-
-> `None` Disable all predefined prefix for next setting **V**
-
-### 3. **Add my own prefix set **(`vscodeGitCommit.customAlias`)
-
-![scm](./assets/screens/exampleAliasesSettings.png)
-
-> Setting auto-completion is enabled
-
-> Custom aliases are displayed first
-
-### 4. **Create own template message** (`vscodeGitCommit.messageTemplate`)
-
-![scm](./assets/screens/exampleTemplateSettings.png)
+![scm](./assets/settings/template.png)
 
 > Each entry of the array is a new line in message template
 
 > Variables are automatically prompted
 
-> `{prefix}` variable display a selector prompt
+> You can create as many lines as you want and as many variables as you want.
+
+### 3. **Use select or text for each variables** (`vscodeGitCommit.messageTemplate`)
+
+![scm](./assets/settings/variables.png)
+
+> Each entry of the array is a variable used in template
+
+> Variables are automatically prompted, if you give an array of elements, a select is displayed, else if you give a string, it takes one of presets saved in the extension (in the future files list for example)
+> Available presets for variables are **alpha8 semantic keke angular**
 
 > You can create as many lines as you want and as many variables as you want.
 
+> If a variable is not defined in this setting but defined in template setting, a text input is displayed
+
 ## Changelog
+
+**2.0.0** (_04-09-2021_):
+
+> second release OH YEAHHH !!!!
+
+✨feature: add ability to use text input or select input for any variables
 
 **1.1.5** (_12-18-2020_):  
 📄docs (docs): update docs with animated gif

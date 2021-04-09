@@ -2,7 +2,7 @@
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
   "description": "Automatically generate git commit message with prefix",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "engines": {
     "vscode": "^1.42.0"
   },
@@ -64,18 +64,20 @@
             }
           },
           "default": [],
-          "markdownDescription": "Add prefix to extension (copy paste emoticons from here [Amp What](http://www.amp-what.com/unicode/search/icon))"
+          "markdownDescription": "Add prefix to extension (copy paste emoticons from here [Amp What](http://www.amp-what.com/unicode/search/icon))",
+          "deprecationMessage": "Deprecated: use vscodeGitCommit.variables instead, Migration put your aliases in variables.aliases as an array"
         },
         "vscodeGitCommit.messageTemplate": {
           "type": "array",
           "items": {
             "type": "string",
-            "title": "Template"
+            "title": "Message Template"
           },
           "default": [
             "{prefix}: {message}"
           ],
-          "markdownDescription": "Add abilities to create custom message format, each variable is between mustaches and a prompt is automatically added to the workflow"
+          "markdownDescription": "Add abilities to create custom message format, each variable is between mustaches and a prompt is automatically added to the workflow",
+          "deprecationMessage": "Deprecated: settings renamed as vscodeGitCommit.template"
         },
         "vscodeGitCommit.predefinedPrefix": {
           "type": "string",
@@ -94,7 +96,8 @@
             "Alpha8, commitizen based commits",
             "No prefix predefined"
           ],
-          "markdownDescription": "Select predefined prefix (Live update) (Options: Creator Prefix / [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md) / [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) / [Alpha8](https://github.com/commitizen-tools/commitizen/blob/master/commitizen/cz/conventional_commits/conventional_commits.py) / none"
+          "markdownDescription": "Select predefined prefix (Live update) (Options: Creator Prefix / [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md) / [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) / [Alpha8](https://github.com/commitizen-tools/commitizen/blob/master/commitizen/cz/conventional_commits/conventional_commits.py) / none",
+          "deprecationMessage": "Deprecated: use vscodeGitCommit.variables instead"
         },
         "vscodeGitCommit.insertMode": {
           "type": "string",
@@ -108,6 +111,34 @@
             "Concatenate to existing commit message on new"
           ],
           "markdownDescription": "Select new commit message mode"
+        },
+        "vscodeGitCommit.template": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "title": "Template"
+          },
+          "default": [
+            "{prefix}: {message}"
+          ],
+          "markdownDescription": "Add abilities to create custom message format, each variable is between mustaches and a prompt is automatically added to the workflow"
+        },
+        "vscodeGitCommit.variables": {
+          "type": "object",
+          "uniqueItems": true,
+          "markdownDescription": "Define variables that use QuickPick, **if a variable is not defined, a Text input will be displayed**",
+          "oneOf": [
+            {
+              "key": "string",
+              "label": "string",
+              "detail": "string"
+            },
+            {
+              "key": "string",
+              "label": "string"
+            },
+            "string"
+          ]
         }
       }
     },
@@ -144,7 +175,7 @@
     "extension:lint": "eslint src --ext ts --fix",
     "watch": "tsc -watch -p ./",
     "extension:build": "vsce package",
-    "extension:install": "code --install-extension vscode-git-commit-1.1.4.vsix",
+    "extension:install": "code --install-extension vscode-git-commit-2.0.0.vsix",
     "extension:pretest": "npm run compile && npm run lint",
     "extension:local": "yarn extension:compile && yarn extension:build && yarn extension:install"
   },
