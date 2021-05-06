@@ -7,18 +7,16 @@ import {
   QUICKPICKITEMSUNDEFINED,
 } from './constants';
 
+export const presetAggregation: { [key: string]: IQuickPickItem[] } = {
+  angular: QUICKPICKITEMSANGULAR,
+  semantic: QUICKPICKITEMSSEMANTIC,
+  alpha8: QUICKPICKITEMSALPHA8,
+  keke: QUICKPICKITEMSKEKE,
+};
+
 export const getLocalPreset = (name: string): Array<IQuickPickItem> => {
-  if (name === 'angular') {
-    return QUICKPICKITEMSANGULAR;
-  }
-  if (name === 'semantic') {
-    return QUICKPICKITEMSSEMANTIC;
-  }
-  if (name === 'alpha8') {
-    return QUICKPICKITEMSALPHA8;
-  }
-  if (name === 'keke') {
-    return QUICKPICKITEMSKEKE;
+  if (Object.keys(presetAggregation).includes(name)) {
+    return presetAggregation[name];
   } else {
     return QUICKPICKITEMSUNDEFINED;
   }

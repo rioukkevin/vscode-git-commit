@@ -8,6 +8,7 @@ import {
   templateSerialize,
   TVariable,
 } from '../utils/template';
+import { parseVariable } from '../utils/variables';
 
 export const execute = async (repo: any) => {
   const template = getTemplate();
@@ -30,10 +31,7 @@ export const execute = async (repo: any) => {
         placeHolder: `Please type the value for <${v}>`,
       });
     } else {
-      const choices: IQuickPickItem[] =
-        typeof variablesSettings[v] === 'string'
-          ? (getLocalPreset(variablesSettings[v] as string) as any[])
-          : (variablesSettings[v] as IQuickPickItem[]);
+      const choices: IQuickPickItem[] = parseVariable(v);
       result.value = await useQuickPick(
         {
           ignoreFocusOut: true,
