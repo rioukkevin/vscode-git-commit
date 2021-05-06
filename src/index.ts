@@ -25,7 +25,8 @@ export function activate(context: vscode.ExtensionContext) {
         params?._quickDiffProvider?.repository?.repositoryRoot || undefined;
       let repo: Repository = getRepo(repoUri);
       setTimeout(async () => {
-        execute(repo);
+        await execute(repo);
+        vscode.commands.executeCommand('workbench.scm.focus');
       }, 200);
     }
   );
