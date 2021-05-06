@@ -1,6 +1,11 @@
 import * as vscode from 'vscode';
 import { EXTENSION_NAME } from '../config/const';
-import { getAliases, getOldTemplate, getPreset } from './settings';
+import {
+  getAliases,
+  getOldTemplate,
+  getPreset,
+  getVariables,
+} from './settings';
 
 const prefixNameAggregation: { [key: string]: any } = {
   'Creator Prefix': 'keke',
@@ -11,6 +16,7 @@ const prefixNameAggregation: { [key: string]: any } = {
 };
 
 export const migrate = () => {
+  // V1 to V2
   const oldAliases = getAliases();
   const usedPrefix = getPreset();
   const oldTemplate = getOldTemplate();
@@ -39,6 +45,22 @@ export const migrate = () => {
     vscode.workspace
       .getConfiguration(EXTENSION_NAME)
       .update('messageTemplate', undefined, true);
-    console.log('MIGRATION TEMPLATE');
+    console.log('MIGRATION TEMPLATE V1 -> V2');
+  }
+
+  // V2 to V2.1
+  const oldVariables = getVariables();
+  if (
+    oldVariables.aliases &&
+    !(oldVariables.prefix as string).includes('...')
+  ) {
+    const newVariables = {
+      ...oldVariables,
+      prefix: `aliases...${oldVariables.prefix}`,
+    };
+    vscode.workspace
+      .getConfiguration(EXTENSION_NAME)
+      .update('variables', newVariables, true);
+    console.log('MIGRATION TEMPLATE V2 -> V2.1');
   }
 };

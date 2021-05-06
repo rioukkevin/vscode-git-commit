@@ -2,7 +2,7 @@
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
   "description": "Automatically generate git commit message with prefix",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "engines": {
     "vscode": "^1.42.0"
   },
@@ -175,7 +175,7 @@
     "extension:lint": "eslint src --ext ts --fix",
     "watch": "tsc -watch -p ./",
     "extension:build": "vsce package",
-    "extension:install": "code --install-extension vscode-git-commit-2.0.0.vsix",
+    "extension:install": "code --install-extension vscode-git-commit-2.1.0.vsix",
     "extension:pretest": "npm run compile && npm run lint",
     "extension:local": "yarn extension:compile && yarn extension:build && yarn extension:install"
   },

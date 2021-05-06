@@ -48,7 +48,15 @@ Options:
 
 > If a variable is not defined in this setting but defined in template setting, a text input is displayed
 
+> `!NEW!` If a variable need content of an other one, you can use the operator `...` to merge multiple variables let me explain it with an example above (prefix variable is combining firstly the **aliases** and secondly the preset **alpha8**)
+
+![scm](./assets/settings/variablesMerge.png)
+
 ## Changelog
+
+**2.1.0** (_05-06-2021_):  
+✨feature: auto focus scm commit input on finish (cf: issues [#10](https://github.com/rioukkevin/vscode-git-commit/issues/10))  
+✨feature: add abilities to concatenate multiple variables in settings (cf: issues [#11](https://github.com/rioukkevin/vscode-git-commit/issues/11) & [#12](https://github.com/rioukkevin/vscode-git-commit/issues/12))
 
 **2.0.0** (_04-09-2021_):
 
