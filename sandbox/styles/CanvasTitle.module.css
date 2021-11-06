@@ -1,6 +1,7 @@
 .title {
   position: relative;
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .title::before {
@@ -11,5 +12,5 @@
   background-color: #db4437;
   position: absolute;
   top: 0;
-  left: -40px;
+  right: -40px;
 }

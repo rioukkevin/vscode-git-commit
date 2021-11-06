@@ -1,4 +1,4 @@
-import React, { useState, useMemo, FC, useCallback } from 'react';
+import React, { useState, useMemo, FC, useCallback, useEffect } from 'react';
 import { createEditor, Descendant, Element, Node } from 'slate';
 import { Slate, Editable, withReact, RenderLeafProps } from 'slate-react';
 import styles from '../styles/Input.module.css';
@@ -17,6 +17,7 @@ const initialValue: Descendant[] = [
       { text: 'scope', variable: true },
       { text: '): ' },
       { text: 'message', variable: true },
+      { text: ' ' },
     ],
   },
 ];
@@ -35,6 +36,10 @@ const TemplateInput: FC<IProps> = (props) => {
   const handleClickLeaf = (children: any) => {
     console.log(children.props.text.text);
   };
+
+  useEffect(() => {
+    props.onType(initialValue);
+  }, []);
 
   const renderLeaf = useCallback((props: RenderLeafProps) => {
     return <Leaf onClick={handleClickLeaf} {...props} />;

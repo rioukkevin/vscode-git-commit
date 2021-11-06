@@ -28,13 +28,23 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.left}>
-          <CanvasTitle title="Template" />
-          <TemplateInput onType={handleInputChange} />
+        <div className={styles.line}>
+          <div className={styles.left}>
+            <CanvasTitle title="Template" />
+            <TemplateInput onType={handleInputChange} />
+          </div>
+          <div className={styles.right}>
+            <CodeTitle title="Template" />
+            <TemplateRenderer template={template} />
+          </div>
         </div>
-        <div className={styles.right}>
-          <CodeTitle title="Template" />
-          <TemplateRenderer template={template} />
+        <div className={styles.line}>
+          <div className={styles.left}>
+            <CanvasTitle title="Variables" />
+          </div>
+          <div className={styles.right}>
+            <CodeTitle title="Variables" />
+          </div>
         </div>
       </main>
 

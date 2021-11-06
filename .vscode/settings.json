@@ -42,5 +42,22 @@
     ]
   },
 
-  "vscodeGitCommit.template": ["{prefix} ({scope}): {message}"]
+  "vscodeGitCommit.template": [
+    "{prefix} ({scope}): {message}"
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#c50528",
+    "activityBar.activeBorder": "#0d3e02",
+    "activityBar.background": "#c50528",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#0d3e02",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "tab.activeBorder": "#c50528",
+    "editorGroup.border": "#c50528",
+    "panel.border": "#c50528",
+    "sash.hoverBorder": "#c50528",
+    "sideBar.border": "#c50528"
+  },
+  "peacock.color": "#93041e"
 }

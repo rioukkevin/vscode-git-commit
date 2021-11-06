@@ -4,7 +4,8 @@
 
 .editor {
   min-width: 400px;
-  background-color: #fbfbfb;
+  width: 100%;
+  background-color: #fdfdfd;
   padding: 10px;
   border-radius: 4px;
 }

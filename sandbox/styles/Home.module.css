@@ -7,16 +7,26 @@
 
 .main {
   min-height: 100vh;
-  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background: linear-gradient();
+}
+
+.line {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
 }
 
+.line:last-child {
+  height: 100%;
+}
+
 .left,
 .right {
   flex-grow: 1;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 40px;
