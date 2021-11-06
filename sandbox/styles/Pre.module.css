@@ -1,0 +1,14 @@
+.preContainer {
+  width: 100%;
+  position: relative;
+}
+
+.preContainer > pre::selection {
+  background-color: #db44377f;
+}
+
+.copyIcon {
+  position: absolute !important;
+  right: 0;
+  top: 0;
+}

@@ -1,0 +1,15 @@
+.title {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.title::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 100%;
+  background-color: #db4437;
+  position: absolute;
+  top: 0;
+  left: -40px;
+}

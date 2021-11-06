@@ -1,0 +1,10 @@
+.container {
+  width: fit-content;
+}
+
+.editor {
+  min-width: 400px;
+  background-color: #fbfbfb;
+  padding: 10px;
+  border-radius: 4px;
+}
