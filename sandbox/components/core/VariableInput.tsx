@@ -1,18 +1,19 @@
-import { Input } from '@chakra-ui/react';
+import { IconButton, Input } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react';
 import { IVariable } from '../../typings/Data';
 import styles from '../../styles/StringInput.module.css';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 interface IProps {
   value: IVar;
   onChange: (label: string, detail: string) => void;
-  onDelete?: () => void;
+  onDelete: () => void;
 }
 
 export interface IVar extends Omit<IVariable, 'key'> {}
 
 const VariableInput: FC<IProps> = (props) => {
-  const { value, onChange } = props;
+  const { value, onChange, onDelete } = props;
 
   const [label, setLabel] = useState<string>(value.label);
   const [detail, setDetail] = useState<string>(value.detail ?? '');
@@ -34,17 +35,32 @@ const VariableInput: FC<IProps> = (props) => {
 
   return (
     <div className={styles.container}>
-      <Input
+      <div className={styles.input}>
+        <Input
+          size="sm"
+          placeholder="nom..."
+          value={label}
+          onChange={handleChangeLabel}
+          className={styles.label}
+          variant="filled"
+        />
+        <Input
+          size="sm"
+          placeholder="description..."
+          value={detail}
+          onChange={handleChangeDetail}
+          variant="filled"
+        />
+      </div>
+      <IconButton
+        className={styles.deleteIcon}
+        aria-label="copy"
+        icon={<DeleteIcon />}
+        color="#000000"
+        backgroundColor="#EEF2F6"
+        _hover={{ backgroundColor: '#db4437', color: '#FBFFFF' }}
         size="sm"
-        placeholder="nom..."
-        value={label}
-        onChange={handleChangeLabel}
-      />
-      <Input
-        size="sm"
-        placeholder="description..."
-        value={detail}
-        onChange={handleChangeDetail}
+        onClick={onDelete}
       />
     </div>
   );

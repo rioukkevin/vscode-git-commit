@@ -1,0 +1,11 @@
+.input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.button {
+  width: 300px !important;
+  margin-left: 5px;
+}

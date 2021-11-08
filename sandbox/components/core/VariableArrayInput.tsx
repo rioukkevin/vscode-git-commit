@@ -11,20 +11,40 @@ interface IProps {
 const VariableArrayInput: FC<IProps> = (props) => {
   const { onChange } = props;
 
-  const [values, setValues] = useState<Omit<IVariable, 'key'>[]>([
-    {
-      label: '',
-      detail: '',
-    },
-  ]);
+  const [values, setValues] = useState<Omit<IVariable, 'key'>[]>([]);
 
-  const handleInputChange = (newLabel: string, index: number) => {
+  const handleInputChange = (
+    newLabel: string,
+    newDetail: string,
+    index: number
+  ) => {
     setValues((oldValue) => {
       const temp = oldValue;
       temp[index] = {
         label: newLabel,
+        detail: newDetail.length > 0 ? newDetail : undefined,
       };
-      console.log(temp);
+      onChange(temp);
+      return temp;
+    });
+  };
+
+  const handleAdd = () => {
+    setValues((oldValues) => {
+      const temp = [
+        ...oldValues,
+        {
+          label: '',
+        },
+      ];
+      onChange(temp);
+      return temp;
+    });
+  };
+
+  const handleDelete = (index: number) => {
+    setValues((oldValue) => {
+      const temp = oldValue.filter((_, i) => i !== index);
       onChange(temp);
       return temp;
     });
@@ -36,22 +56,13 @@ const VariableArrayInput: FC<IProps> = (props) => {
         return (
           <VariableInput
             value={v}
-            onChange={(label, detail) => handleInputChange(label, i)}
+            onChange={(label, detail) => handleInputChange(label, detail, i)}
             key={i}
+            onDelete={() => handleDelete(i)}
           />
         );
       })}
-      <Button
-        onClick={() =>
-          setValues((oldValues) => [
-            ...oldValues,
-            {
-              label: '',
-            },
-          ])
-        }
-        size="sm"
-      >
+      <Button onClick={handleAdd} size="sm" className={styles.addButton}>
         Add
       </Button>
     </>

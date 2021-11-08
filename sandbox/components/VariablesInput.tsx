@@ -3,9 +3,11 @@ import { Descendant } from 'slate';
 import { CustomElement } from '../typings/Editor';
 import { parseVariable } from './VariablesInput.utils';
 import styles from '../styles/VariableInput.module.css';
-import { Select } from '@chakra-ui/select';
-import VariableArrayInput from './core/VariableArrayInput';
 import { IVar } from './core/VariableInput';
+import VariableInputElement from './VariablesInputElement';
+import { Divider, Input } from '@chakra-ui/react';
+import VariableAdd from './VariableAdd';
+import VariableInputElementCustom from './VariablesInputElementCustom';
 
 interface IProps {
   template: Descendant[];
@@ -13,7 +15,7 @@ interface IProps {
 }
 
 export interface IVariablesContent {
-  [key: string]: IVar[];
+  [key: string]: IVar[] | undefined;
 }
 
 const VariableInput: FC<IProps> = (props) => {
@@ -23,41 +25,52 @@ const VariableInput: FC<IProps> = (props) => {
     {}
   );
 
-  const [type, setType] = useState<'string' | 'array'>('string');
+  const variablesFromTemplate: string[] =
+    parseVariable(template as CustomElement[]) ?? [];
 
-  const variables: string[] = parseVariable(template as CustomElement[]) ?? [];
+  const [variablesCustom, setVariablesCustom] = useState<string[]>([]);
 
-  const handleVariableUpdate = (variable: IVar[], v: string) => {
+  const handleVariableUpdate = (v: string, variable?: IVar[]) => {
     setVariablesContent({ ...variablesContent, [v]: variable });
     onChange({ ...variablesContent, [v]: variable });
   };
 
+  const handleAdd = (name: string) => {
+    if (
+      variablesFromTemplate
+        .map((a) => a.toLowerCase())
+        .includes(name.toLowerCase()) ||
+      variablesCustom.map((a) => a.toLowerCase()).includes(name.toLowerCase())
+    ) {
+      return;
+    }
+    setVariablesCustom((oldValue) => [...oldValue, name]);
+  };
+
+  const handleDelete = (name: string) => {
+    setVariablesCustom((oldValue) => oldValue.filter((o) => o !== name));
+  };
+
   return (
     <div className={styles.container}>
-      {variables.map((v) => (
-        <>
-          <h3 className={styles.name} key={v}>
-            @{v}
-          </h3>
-          <div className={styles.content}>
-            <div className={styles.contentLeft}>
-              <Select
-                size="sm"
-                value={type}
-                onChange={(e) => setType(e.target.value as 'string' | 'array')}
-              >
-                <option value="string">String</option>
-                <option value="array">Array</option>
-              </Select>
-            </div>
-            <div className={styles.contentRight}>
-              <VariableArrayInput
-                onChange={(variable) => handleVariableUpdate(variable, v)}
-              />
-            </div>
-          </div>
-        </>
+      {variablesFromTemplate.map((v) => (
+        <VariableInputElement
+          name={v}
+          onChange={handleVariableUpdate}
+          key={v}
+        />
       ))}
+      <Divider className={styles.divider} />
+      {variablesCustom.map((v) => (
+        <VariableInputElementCustom
+          name={v}
+          onChange={handleVariableUpdate}
+          key={v}
+          onDelete={() => handleDelete(v)}
+        />
+      ))}
+      <Divider className={styles.divider} />
+      <VariableAdd onAdd={handleAdd} />
     </div>
   );
 };

@@ -20,10 +20,6 @@
   flex-wrap: nowrap;
 }
 
-.line:last-child {
-  height: 100%;
-}
-
 .left,
 .right {
   flex-grow: 1;

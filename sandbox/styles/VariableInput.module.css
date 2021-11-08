@@ -5,6 +5,12 @@
   width: 100%;
 }
 
+.name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
 .content {
   display: flex;
   flex-direction: row;
@@ -13,10 +19,18 @@
 
 .contentLeft {
   flex-shrink: 1;
+  min-width: 90px;
+  padding-bottom: 20px;
 }
 
 .contentRight {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   padding-left: 20px;
+  width: 100%;
+}
+
+.divider {
+  margin: 20px 0;
 }

@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import { Descendant } from 'slate';
 import Pre from './core/Pre';
-import { serializer } from './TemplateRenderer.utils';
+import { IVariablesContent } from './VariablesInput';
+import { serializer } from './VariablesRenderer.utils';
 
 interface IProps {
-  template: Descendant[];
+  variables: IVariablesContent;
 }
 
-const TemplateRenderer: FC<IProps> = (props) => {
-  const { template } = props;
-  return <Pre>{`"vscodeGitCommit.template": ${serializer(template)}`}</Pre>;
+const VariablesRenderer: FC<IProps> = (props) => {
+  const { variables } = props;
+  return <Pre>{`"vscodeGitCommit.variables": ${serializer(variables)}`}</Pre>;
 };
 
-export default TemplateRenderer;
+export default VariablesRenderer;
