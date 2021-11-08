@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.select {
+  margin-bottom: 5px;
+}
+
+.deleteIcon {
+  margin-left: 5px;
+}

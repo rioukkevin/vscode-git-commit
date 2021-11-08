@@ -1,3 +1,4 @@
+import { Heading } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import React, { useState } from 'react';
@@ -34,11 +35,9 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.line}>
           <div className={styles.left}>
-            <CanvasTitle title="Insert Mode" />
+            <Heading>Git commit message configurator</Heading>
           </div>
-          <div className={styles.right}>
-            <CodeTitle title="Insert Mode" />
-          </div>
+          <div className={styles.right} />
         </div>
         <div className={styles.line}>
           <div className={styles.left}>

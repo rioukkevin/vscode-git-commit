@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Descendant } from 'slate';
 import { CustomElement } from '../typings/Editor';
 import { parseVariable } from './VariablesInput.utils';
@@ -15,27 +15,42 @@ interface IProps {
 }
 
 export interface IVariablesContent {
-  [key: string]: IVar[] | undefined;
+  [key: string]: IVar[] | string[] | undefined;
 }
 
 const VariableInput: FC<IProps> = (props) => {
   const { template, onChange } = props;
 
+  // States
   const [variablesContent, setVariablesContent] = useState<IVariablesContent>(
     {}
   );
-
-  const variablesFromTemplate: string[] =
-    parseVariable(template as CustomElement[]) ?? [];
-
+  const [variablesFromTemplate, setVariablesFromTemplate] = useState<string[]>(
+    []
+  );
   const [variablesCustom, setVariablesCustom] = useState<string[]>([]);
 
-  const handleVariableUpdate = (v: string, variable?: IVar[]) => {
+  // Dynamic variables
+  const availableForMerge = [
+    ...variablesFromTemplate,
+    ...variablesCustom,
+  ].filter((n) => !!variablesContent[n]);
+
+  // Update from top
+  useEffect(() => {
+    const newVariables = parseVariable(template as CustomElement[]) ?? [];
+    setVariablesFromTemplate(newVariables);
+  }, [template]);
+
+  // Update from bottom
+  const handleVariableUpdate = (v: string, variable?: IVar[] | string[]) => {
     setVariablesContent({ ...variablesContent, [v]: variable });
     onChange({ ...variablesContent, [v]: variable });
   };
 
+  // Custom variable actions
   const handleAdd = (name: string) => {
+    // Verif no double
     if (
       variablesFromTemplate
         .map((a) => a.toLowerCase())
@@ -49,6 +64,9 @@ const VariableInput: FC<IProps> = (props) => {
 
   const handleDelete = (name: string) => {
     setVariablesCustom((oldValue) => oldValue.filter((o) => o !== name));
+    // Update Content
+    setVariablesContent({ ...variablesContent, [name]: undefined });
+    onChange({ ...variablesContent, [name]: undefined });
   };
 
   return (
@@ -58,6 +76,7 @@ const VariableInput: FC<IProps> = (props) => {
           name={v}
           onChange={handleVariableUpdate}
           key={v}
+          mergeItems={availableForMerge}
         />
       ))}
       <Divider className={styles.divider} />
@@ -69,7 +88,7 @@ const VariableInput: FC<IProps> = (props) => {
           onDelete={() => handleDelete(v)}
         />
       ))}
-      <Divider className={styles.divider} />
+      {variablesCustom.length > 0 && <Divider className={styles.divider} />}
       <VariableAdd onAdd={handleAdd} />
     </div>
   );

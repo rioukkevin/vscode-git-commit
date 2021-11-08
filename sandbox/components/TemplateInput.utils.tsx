@@ -22,7 +22,11 @@ interface LeafProps extends RenderLeafProps {
 
 export const Leaf = (props: LeafProps) => {
   return props.leaf.variable ? (
-    <Badge onClick={() => props.onClick!(props.children)} {...props.attributes}>
+    <Badge
+      onClick={() => props.onClick!(props.children)}
+      {...props.attributes}
+      backgroundColor="#DB4437"
+    >
       {props.children}
     </Badge>
   ) : (
