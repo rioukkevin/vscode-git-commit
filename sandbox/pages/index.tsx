@@ -6,10 +6,13 @@ import CanvasTitle from '../components/CanvasTitle';
 import CodeTitle from '../components/CodeTitle';
 import TemplateInput from '../components/TemplateInput';
 import TemplateRenderer from '../components/TemplateRenderer';
+import VariableInput, { IVariablesContent } from '../components/VariablesInput';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
   const [template, setTemplate] = useState<Descendant[]>([]);
+
+  const [variables, setVariables] = useState<IVariablesContent>({});
 
   const handleInputChange = (newValue: Descendant[]) => {
     console.log(newValue);
@@ -41,14 +44,13 @@ const Home: NextPage = () => {
         <div className={styles.line}>
           <div className={styles.left}>
             <CanvasTitle title="Variables" />
+            <VariableInput template={template} onChange={setVariables} />
           </div>
           <div className={styles.right}>
             <CodeTitle title="Variables" />
           </div>
         </div>
       </main>
-
-      <footer className={styles.footer}>Powered by @Me</footer>
     </div>
   );
 };

@@ -9,7 +9,7 @@ export type LineElement = {
   children: CustomText[];
 };
 
-type CustomElement = LineElement;
+export type CustomElement = LineElement;
 
 declare module 'slate' {
   interface CustomTypes {

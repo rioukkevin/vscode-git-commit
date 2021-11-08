@@ -1,0 +1,11 @@
+.container {
+  padding: 10px 0;
+}
+
+.container:first-child {
+  padding-top: 0;
+}
+
+.container:last-child {
+  padding-bottom: 0;
+}
