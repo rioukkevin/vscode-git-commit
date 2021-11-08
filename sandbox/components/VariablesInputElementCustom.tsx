@@ -5,15 +5,36 @@ import VariableArrayInput from './core/VariableArrayInput';
 import { IVar } from './core/VariableInput';
 import { IconButton } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
+import VariableMergeInput from './core/VariableMergeInput';
 
 interface IProps {
   name: string;
-  onChange: (name: string, newValue?: IVar[]) => void;
+  onChange: (name: string, newValue?: IVar[] | string[]) => void;
   onDelete: () => void;
+  mergeItems: string[];
 }
 
 const VariableInputElementCustom: FC<IProps> = (props) => {
-  const { name, onChange, onDelete } = props;
+  const { name, onChange, onDelete, mergeItems } = props;
+
+  const [type, setType] = useState<'string' | 'array' | 'merge'>('string');
+
+  const mergeItemsWithoutSelf = mergeItems.filter((a) => a !== name);
+
+  // Update from bottom
+  const handleChangeType = (e: any) => {
+    const newVal = e.target.value as 'string' | 'array' | 'merge';
+    setType(newVal);
+    if (newVal === 'string') {
+      onChange(name, undefined);
+    } else {
+      onChange(name, []);
+    }
+  };
+
+  const handleChangeData = (name: string, content: IVar[] | string[]) => {
+    onChange(name, content);
+  };
 
   return (
     <>
@@ -21,7 +42,16 @@ const VariableInputElementCustom: FC<IProps> = (props) => {
         {name}
       </h3>
       <div className={styles.content}>
-        <div className={styles.contentLeft}>
+        <div className={`${styles.contentLeft} ${styles.contentLeftRow}`}>
+          <Select
+            size="sm"
+            value={type}
+            onChange={handleChangeType}
+            variant="filled"
+          >
+            <option value="array">Array</option>
+            <option value="merge">Merge</option>
+          </Select>
           <IconButton
             className={styles.deleteIcon}
             aria-label="copy"
@@ -31,12 +61,21 @@ const VariableInputElementCustom: FC<IProps> = (props) => {
             _hover={{ backgroundColor: '#db4437', color: '#FBFFFF' }}
             size="sm"
             onClick={onDelete}
+            style={{ marginLeft: '5px' }}
           />
         </div>
         <div className={styles.contentRight}>
-          <VariableArrayInput
-            onChange={(variable) => onChange(name, variable)}
-          />
+          {type === 'array' && (
+            <VariableArrayInput
+              onChange={(variable) => handleChangeData(name, variable)}
+            />
+          )}
+          {type === 'merge' && (
+            <VariableMergeInput
+              mergeItems={mergeItemsWithoutSelf}
+              onChange={(variable) => handleChangeData(name, variable)}
+            />
+          )}
         </div>
       </div>
     </>

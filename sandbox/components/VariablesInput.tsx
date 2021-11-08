@@ -86,6 +86,7 @@ const VariableInput: FC<IProps> = (props) => {
           onChange={handleVariableUpdate}
           key={v}
           onDelete={() => handleDelete(v)}
+          mergeItems={availableForMerge}
         />
       ))}
       {variablesCustom.length > 0 && <Divider className={styles.divider} />}

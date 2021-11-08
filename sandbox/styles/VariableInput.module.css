@@ -19,8 +19,13 @@
 
 .contentLeft {
   flex-shrink: 1;
-  min-width: 90px;
+  min-width: 150px;
   padding-bottom: 20px;
+}
+
+.contentLeftRow {
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .contentRight {
