@@ -5,11 +5,13 @@ export const serializer = (variables: IVariablesContent) => {
   Object.keys(variables).map((key) => {
     if (
       variables &&
-      variables[key] &&
+      variables[key] !== undefined &&
       variables[key]![0] &&
+      Array.isArray(variables[key]) &&
       typeof variables[key]![0] === 'string'
     ) {
-      toDisplay[key] = variables[key]?.join('...');
+      const tot = variables[key] as string[];
+      toDisplay[key] = tot.join('...');
     }
   });
   return JSON.stringify({ ...variables, ...toDisplay }, null, 2);

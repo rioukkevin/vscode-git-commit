@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Descendant } from 'slate';
 import { CustomElement } from '../typings/Editor';
-import { parseVariable } from './VariablesInput.utils';
+import { parseVariable, PREDEFINED_PREFIX } from './VariablesInput.utils';
 import styles from '../styles/VariableInput.module.css';
 import { IVar } from './core/VariableInput';
 import VariableInputElement from './VariablesInputElement';
@@ -15,7 +15,7 @@ interface IProps {
 }
 
 export interface IVariablesContent {
-  [key: string]: IVar[] | string[] | undefined;
+  [key: string]: IVar[] | string[] | string | undefined;
 }
 
 const VariableInput: FC<IProps> = (props) => {
@@ -43,7 +43,10 @@ const VariableInput: FC<IProps> = (props) => {
   }, [template]);
 
   // Update from bottom
-  const handleVariableUpdate = (v: string, variable?: IVar[] | string[]) => {
+  const handleVariableUpdate = (
+    v: string,
+    variable?: IVar[] | string[] | string
+  ) => {
     setVariablesContent({ ...variablesContent, [v]: variable });
     onChange({ ...variablesContent, [v]: variable });
   };
@@ -76,7 +79,7 @@ const VariableInput: FC<IProps> = (props) => {
           name={v}
           onChange={handleVariableUpdate}
           key={v}
-          mergeItems={availableForMerge}
+          mergeItems={[...availableForMerge, ...PREDEFINED_PREFIX]}
         />
       ))}
       <Divider className={styles.divider} />
@@ -86,7 +89,7 @@ const VariableInput: FC<IProps> = (props) => {
           onChange={handleVariableUpdate}
           key={v}
           onDelete={() => handleDelete(v)}
-          mergeItems={availableForMerge}
+          mergeItems={[...availableForMerge, ...PREDEFINED_PREFIX]}
         />
       ))}
       {variablesCustom.length > 0 && <Divider className={styles.divider} />}

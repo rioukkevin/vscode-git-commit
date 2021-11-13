@@ -18,3 +18,10 @@ export const parseVariable = (template: CustomElement[]) => {
       .map((el) => el.text);
   }
 };
+
+export const PREDEFINED_PREFIX: string[] = [
+  'keke',
+  'semantic',
+  'angular',
+  'alpha8',
+];
