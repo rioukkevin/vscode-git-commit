@@ -17,19 +17,15 @@ interface IProps {
 const VariableInputElementCustom: FC<IProps> = (props) => {
   const { name, onChange, onDelete, mergeItems } = props;
 
-  const [type, setType] = useState<'string' | 'array' | 'merge'>('string');
+  const [type, setType] = useState<'array' | 'merge'>('array');
 
   const mergeItemsWithoutSelf = mergeItems.filter((a) => a !== name);
 
   // Update from bottom
   const handleChangeType = (e: any) => {
-    const newVal = e.target.value as 'string' | 'array' | 'merge';
+    const newVal = e.target.value as 'array' | 'merge';
     setType(newVal);
-    if (newVal === 'string') {
-      onChange(name, undefined);
-    } else {
-      onChange(name, []);
-    }
+    onChange(name, []);
   };
 
   const handleChangeData = (name: string, content: IVar[] | string[]) => {

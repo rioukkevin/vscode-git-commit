@@ -58,11 +58,16 @@ const VariableInput: FC<IProps> = (props) => {
       variablesFromTemplate
         .map((a) => a.toLowerCase())
         .includes(name.toLowerCase()) ||
-      variablesCustom.map((a) => a.toLowerCase()).includes(name.toLowerCase())
+      variablesCustom
+        .map((a) => a.toLowerCase())
+        .includes(name.toLowerCase()) ||
+      PREDEFINED_PREFIX.map((a) => a.toLowerCase()).includes(name.toLowerCase())
     ) {
       return;
     }
     setVariablesCustom((oldValue) => [...oldValue, name]);
+    setVariablesContent({ ...variablesContent, [name]: [] });
+    onChange({ ...variablesContent, [name]: [] });
   };
 
   const handleDelete = (name: string) => {

@@ -15,7 +15,7 @@ const VariableAdd: FC<IProps> = (props) => {
 
   const handleClick = () => {
     if (value.length > 0) {
-      onAdd(value);
+      onAdd(value.toLowerCase());
       setValue('');
     } else {
       setIsError(true);
@@ -29,7 +29,7 @@ const VariableAdd: FC<IProps> = (props) => {
     <div className={styles.input}>
       <Input
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setValue(e.target.value.toUpperCase())}
         variant="filled"
         size="sm"
         placeholder="name..."
