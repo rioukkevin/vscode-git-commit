@@ -1,15 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
+import { Store } from '../utils/store';
+import { variableSerializer } from '../utils/variables';
 import Pre from './core/Pre';
-import { IVariablesContent } from './VariablesInput';
-import { serializer } from './VariablesRenderer.utils';
 
-interface IProps {
-  variables: IVariablesContent;
-}
+interface IProps {}
 
 const VariablesRenderer: FC<IProps> = (props) => {
-  const { variables } = props;
-  return <Pre>{`"vscodeGitCommit.variables": ${serializer(variables)}`}</Pre>;
+  const { variables } = useContext(Store);
+  return (
+    <Pre>{`"vscodeGitCommit.variables": ${variableSerializer(variables)}`}</Pre>
+  );
 };
 
 export default VariablesRenderer;

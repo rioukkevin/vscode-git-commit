@@ -1,26 +1,16 @@
 import { Heading } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React, { useState } from 'react';
-import { Descendant } from 'slate';
+import React from 'react';
 import CanvasTitle from '../components/CanvasTitle';
 import CodeTitle from '../components/CodeTitle';
 import TemplateInput from '../components/TemplateInput';
 import TemplateRenderer from '../components/TemplateRenderer';
-import VariableInput, { IVariablesContent } from '../components/VariablesInput';
+import VariableInput from '../components/VariablesInput';
 import VariablesRenderer from '../components/VariablesRenderer';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-  const [template, setTemplate] = useState<Descendant[]>([]);
-
-  const [variables, setVariables] = useState<IVariablesContent>({});
-
-  const handleInputChange = (newValue: Descendant[]) => {
-    console.log(newValue);
-    setTemplate(newValue);
-  };
-
   return (
     <div className={styles.container}>
       <Head>
@@ -36,27 +26,34 @@ const Home: NextPage = () => {
         <div className={styles.line}>
           <div className={styles.left}>
             <Heading>Git commit message configurator</Heading>
+            <p className={styles.presentation}>
+              This website as goal to generate settings for{' '}
+              <a href="https://marketplace.visualstudio.com/items?itemName=rioukkevin.vscode-git-commit">
+                VSCode Git Commit Message
+              </a>{' '}
+              extension, this website is a simple GUI for it.
+            </p>
           </div>
           <div className={styles.right} />
         </div>
         <div className={styles.line}>
           <div className={styles.left}>
             <CanvasTitle title="Template" />
-            <TemplateInput onType={handleInputChange} />
+            <TemplateInput />
           </div>
           <div className={styles.right}>
             <CodeTitle title="Template" />
-            <TemplateRenderer template={template} />
+            <TemplateRenderer />
           </div>
         </div>
         <div className={styles.line}>
           <div className={styles.left}>
             <CanvasTitle title="Variables" />
-            <VariableInput template={template} onChange={setVariables} />
+            <VariableInput />
           </div>
           <div className={styles.right}>
             <CodeTitle title="Variables" />
-            <VariablesRenderer variables={variables} />
+            <VariablesRenderer />
           </div>
         </div>
       </main>

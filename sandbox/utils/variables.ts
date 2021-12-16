@@ -1,6 +1,13 @@
-import { IVariablesContent } from './VariablesInput';
+import { IStoreVariables } from '../typings/Store';
 
-export const serializer = (variables: IVariablesContent) => {
+export const PREDEFINED_PREFIX: string[] = [
+  'keke',
+  'semantic',
+  'angular',
+  'alpha8',
+];
+
+export const variableSerializer = (variables: IStoreVariables) => {
   const toDisplay: { [key: string]: any } = {};
   Object.keys(variables).map((key) => {
     if (

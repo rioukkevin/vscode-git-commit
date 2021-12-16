@@ -1,103 +1,64 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Descendant } from 'slate';
-import { CustomElement } from '../typings/Editor';
-import { parseVariable, PREDEFINED_PREFIX } from './VariablesInput.utils';
+import React, { FC, useContext } from 'react';
+import { LineElement } from '../typings/Editor';
 import styles from '../styles/VariableInput.module.css';
-import { IVar } from './core/VariableInput';
 import VariableInputElement from './VariablesInputElement';
 import { Divider, Input } from '@chakra-ui/react';
 import VariableAdd from './VariableAdd';
 import VariableInputElementCustom from './VariablesInputElementCustom';
+import { Store } from '../utils/store';
+import { parseVariableFromTemplate } from '../utils/template';
+import { PREDEFINED_PREFIX } from '../utils/variables';
 
-interface IProps {
-  template: Descendant[];
-  onChange: (datas: IVariablesContent) => void;
-}
-
-export interface IVariablesContent {
-  [key: string]: IVar[] | string[] | string | undefined;
-}
+interface IProps {}
 
 const VariableInput: FC<IProps> = (props) => {
-  const { template, onChange } = props;
+  const { variables, template, setVariable } = useContext(Store);
 
-  // States
-  const [variablesContent, setVariablesContent] = useState<IVariablesContent>(
-    {}
+  const templateVariables =
+    parseVariableFromTemplate(template as LineElement[]) ?? [];
+  const customVariables =
+    Object.keys(variables).filter(
+      (v) => !templateVariables?.includes(v) && variables[v] !== undefined
+    ) ?? [];
+
+  const availableForMerge = [...templateVariables, ...customVariables].filter(
+    (n) => !!variables[n]
   );
-  const [variablesFromTemplate, setVariablesFromTemplate] = useState<string[]>(
-    []
-  );
-  const [variablesCustom, setVariablesCustom] = useState<string[]>([]);
 
-  // Dynamic variables
-  const availableForMerge = [
-    ...variablesFromTemplate,
-    ...variablesCustom,
-  ].filter((n) => !!variablesContent[n]);
-
-  // Update from top
-  useEffect(() => {
-    const newVariables = parseVariable(template as CustomElement[]) ?? [];
-    setVariablesFromTemplate(newVariables);
-  }, [template]);
-
-  // Update from bottom
-  const handleVariableUpdate = (
-    v: string,
-    variable?: IVar[] | string[] | string
-  ) => {
-    setVariablesContent({ ...variablesContent, [v]: variable });
-    onChange({ ...variablesContent, [v]: variable });
-  };
-
-  // Custom variable actions
   const handleAdd = (name: string) => {
     // Verif no double
     if (
-      variablesFromTemplate
+      templateVariables
         .map((a) => a.toLowerCase())
         .includes(name.toLowerCase()) ||
-      variablesCustom
+      customVariables
         .map((a) => a.toLowerCase())
         .includes(name.toLowerCase()) ||
       PREDEFINED_PREFIX.map((a) => a.toLowerCase()).includes(name.toLowerCase())
     ) {
       return;
     }
-    setVariablesCustom((oldValue) => [...oldValue, name]);
-    setVariablesContent({ ...variablesContent, [name]: [] });
-    onChange({ ...variablesContent, [name]: [] });
-  };
-
-  const handleDelete = (name: string) => {
-    setVariablesCustom((oldValue) => oldValue.filter((o) => o !== name));
-    // Update Content
-    setVariablesContent({ ...variablesContent, [name]: undefined });
-    onChange({ ...variablesContent, [name]: undefined });
+    setVariable(name, []);
   };
 
   return (
     <div className={styles.container}>
-      {variablesFromTemplate.map((v) => (
+      {templateVariables.map((v) => (
         <VariableInputElement
           name={v}
-          onChange={handleVariableUpdate}
           key={v}
           mergeItems={[...availableForMerge, ...PREDEFINED_PREFIX]}
         />
       ))}
       <Divider className={styles.divider} />
-      {variablesCustom.map((v) => (
+      {customVariables.map((v) => (
         <VariableInputElementCustom
           name={v}
-          onChange={handleVariableUpdate}
           key={v}
-          onDelete={() => handleDelete(v)}
           mergeItems={[...availableForMerge, ...PREDEFINED_PREFIX]}
         />
       ))}
-      {variablesCustom.length > 0 && <Divider className={styles.divider} />}
+      {customVariables.length > 0 && <Divider className={styles.divider} />}
       <VariableAdd onAdd={handleAdd} />
     </div>
   );

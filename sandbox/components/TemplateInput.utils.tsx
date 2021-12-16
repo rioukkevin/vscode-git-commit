@@ -16,14 +16,12 @@ export const buildOnKeyDown =
     }
   };
 
-interface LeafProps extends RenderLeafProps {
-  onClick: (children: Node) => void;
-}
+interface LeafProps extends RenderLeafProps {}
 
 export const Leaf = (props: LeafProps) => {
   return props.leaf.variable ? (
     <Badge
-      onClick={() => props.onClick!(props.children)}
+      // onClick={() => props.onClick!(props.children)}
       {...props.attributes}
       backgroundColor="#DB4437"
     >

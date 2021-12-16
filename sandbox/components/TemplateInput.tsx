@@ -1,49 +1,38 @@
-import React, { useState, useMemo, FC, useCallback, useEffect } from 'react';
-import { createEditor, Descendant, Element, Node } from 'slate';
+import React, {
+  useMemo,
+  FC,
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+} from 'react';
+import { createEditor, Descendant } from 'slate';
 import { Slate, Editable, withReact, RenderLeafProps } from 'slate-react';
 import styles from '../styles/Input.module.css';
+import { DEFAULT_VALUE, Store } from '../utils/store';
 import { buildOnKeyDown, Leaf } from './TemplateInput.utils';
 
-interface IProps {
-  onType: (value: Descendant[]) => void;
-}
-
-const initialValue: Descendant[] = [
-  {
-    type: 'line',
-    children: [
-      { text: 'feat', variable: true },
-      { text: '(' },
-      { text: 'scope', variable: true },
-      { text: '): ' },
-      { text: 'message', variable: true },
-      { text: ' ' },
-    ],
-  },
-];
+interface IProps {}
 
 const TemplateInput: FC<IProps> = (props) => {
-  const [value, setValue] = useState<Descendant[]>(initialValue);
+  const [value, setValue] = useState<Descendant[]>(DEFAULT_VALUE['template']);
+
+  const { template, setTemplate } = useContext(Store);
+
   const editor = useMemo(() => withReact(createEditor()), []);
 
   const handleChange = (newValue: Descendant[]) => {
-    // @ts-ignore
-    window.toto = newValue;
     setValue(newValue);
-    props.onType(newValue);
+    setTemplate(newValue);
   };
-
-  const handleClickLeaf = (children: any) => {
-    console.log(children.props.text.text);
-  };
-
-  useEffect(() => {
-    props.onType(initialValue);
-  }, []);
 
   const renderLeaf = useCallback((props: RenderLeafProps) => {
-    return <Leaf onClick={handleClickLeaf} {...props} />;
+    return <Leaf {...props} />;
   }, []);
+
+  useEffect(() => {
+    setValue(template);
+  }, [template]);
 
   return (
     <Slate editor={editor} value={value} onChange={handleChange}>

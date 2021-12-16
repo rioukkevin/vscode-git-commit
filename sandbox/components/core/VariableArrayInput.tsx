@@ -1,58 +1,53 @@
-import React, { FC, useState } from 'react';
-import VariableInput, { IVar } from './VariableInput';
+import React, { FC, useContext, useState } from 'react';
+import VariableInput from './VariableInput';
 import styles from '../../styles/StringArrayInput.module.css';
 import { Button } from '@chakra-ui/button';
-import { IVariable } from '../../typings/Data';
+import { Store } from '../../utils/store';
+import { IStoreVariableCustom } from '../../typings/Store';
 
 interface IProps {
-  onChange: (values: IVar[]) => void;
+  name: string;
 }
 
-const VariableArrayInput: FC<IProps> = (props) => {
-  const { onChange } = props;
+type TVariable = IStoreVariableCustom;
 
-  const [values, setValues] = useState<Omit<IVariable, 'key'>[]>([]);
+const VariableArrayInput: FC<IProps> = (props) => {
+  const { name } = props;
+
+  const { variables, setVariable } = useContext(Store);
+  const value = variables[name] as TVariable;
 
   const handleInputChange = (
     newLabel: string,
     newDetail: string,
     index: number
   ) => {
-    setValues((oldValue) => {
-      const temp = oldValue;
-      temp[index] = {
-        label: newLabel,
-        detail: newDetail.length > 0 ? newDetail : undefined,
-      };
-      onChange(temp);
-      return temp;
-    });
+    const temp = value;
+    temp[index] = {
+      label: newLabel,
+      detail: newDetail.length > 0 ? newDetail : undefined,
+    };
+    setVariable(name, temp);
   };
 
   const handleAdd = () => {
-    setValues((oldValues) => {
-      const temp = [
-        ...oldValues,
-        {
-          label: '',
-        },
-      ];
-      onChange(temp);
-      return temp;
-    });
+    const temp = [
+      ...value,
+      {
+        label: '',
+      },
+    ];
+    setVariable(name, temp);
   };
 
   const handleDelete = (index: number) => {
-    setValues((oldValue) => {
-      const temp = oldValue.filter((_, i) => i !== index);
-      onChange(temp);
-      return temp;
-    });
+    const temp = value.filter((_, i) => i !== index);
+    setVariable(name, temp);
   };
 
   return (
     <>
-      {values.map((v, i) => {
+      {value.map((v, i) => {
         return (
           <VariableInput
             value={v}

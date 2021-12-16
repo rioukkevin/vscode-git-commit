@@ -1,20 +1,23 @@
-import React, { FC, useEffect, useState } from 'react';
-import { PREDEFINED_PREFIX } from '../VariablesInput.utils';
+import React, { FC, useContext } from 'react';
+import { Store } from '../../utils/store';
+import { PREDEFINED_PREFIX } from '../../utils/variables';
 import SelectString from './SelectString';
 
 interface IProps {
-  onChange: (newValue: string | undefined) => void;
+  name: string;
 }
 
-const VariablePredefinedInput: FC<IProps> = (props) => {
-  const { onChange } = props;
+type TVariable = string | undefined;
 
-  const [value, setValue] = useState<string | undefined>('');
+const VariablePredefinedInput: FC<IProps> = (props) => {
+  const { name } = props;
+
+  const { variables, setVariable } = useContext(Store);
+  const value = variables[name] as TVariable;
 
   // update from bottom
-  const handleChange = (newValue: string | undefined) => {
-    setValue(newValue);
-    onChange(newValue);
+  const handleChange = (newValue: TVariable) => {
+    setVariable(name, newValue);
   };
 
   return (

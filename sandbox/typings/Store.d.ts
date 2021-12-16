@@ -1,13 +1,13 @@
 import { Descendant } from 'slate';
 
-interface IStoreVariable {
+export interface IStoreVariable {
   label: string;
   detail?: string;
 }
 
-type IStoreVariableCustom = IStoreVariable[];
-type IStoreVariableMerge = string[];
-type IStoreVariablePredefined = string;
+export type IStoreVariableCustom = IStoreVariable[];
+export type IStoreVariableMerge = string[];
+export type IStoreVariablePredefined = string;
 
 type IStoreVariableValue =
   | IStoreVariableCustom

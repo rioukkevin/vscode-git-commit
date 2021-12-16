@@ -1,16 +1,14 @@
 import { IconButton, Input } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react';
-import { IVariable } from '../../typings/Data';
 import styles from '../../styles/StringInput.module.css';
 import { DeleteIcon } from '@chakra-ui/icons';
+import { IStoreVariable, IStoreVariableCustom } from '../../typings/Store';
 
 interface IProps {
-  value: IVar;
+  value: IStoreVariable;
   onChange: (label: string, detail: string) => void;
   onDelete: () => void;
 }
-
-export interface IVar extends Omit<IVariable, 'key'> {}
 
 const VariableInput: FC<IProps> = (props) => {
   const { value, onChange, onDelete } = props;

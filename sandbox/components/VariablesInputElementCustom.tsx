@@ -1,21 +1,21 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import styles from '../styles/VariableInput.module.css';
 import { Select } from '@chakra-ui/select';
 import VariableArrayInput from './core/VariableArrayInput';
-import { IVar } from './core/VariableInput';
 import { IconButton } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 import VariableMergeInput from './core/VariableMergeInput';
+import { Store } from '../utils/store';
 
 interface IProps {
   name: string;
-  onChange: (name: string, newValue?: IVar[] | string[]) => void;
-  onDelete: () => void;
   mergeItems: string[];
 }
 
 const VariableInputElementCustom: FC<IProps> = (props) => {
-  const { name, onChange, onDelete, mergeItems } = props;
+  const { name, mergeItems } = props;
+
+  const { variables, setVariable } = useContext(Store);
 
   const [type, setType] = useState<'array' | 'merge'>('array');
 
@@ -25,11 +25,11 @@ const VariableInputElementCustom: FC<IProps> = (props) => {
   const handleChangeType = (e: any) => {
     const newVal = e.target.value as 'array' | 'merge';
     setType(newVal);
-    onChange(name, []);
+    setVariable(name, []);
   };
 
-  const handleChangeData = (name: string, content: IVar[] | string[]) => {
-    onChange(name, content);
+  const handleDelete = () => {
+    setVariable(name, undefined);
   };
 
   return (
@@ -56,20 +56,16 @@ const VariableInputElementCustom: FC<IProps> = (props) => {
             backgroundColor="#EEF2F6"
             _hover={{ backgroundColor: '#db4437', color: '#FBFFFF' }}
             size="sm"
-            onClick={onDelete}
+            onClick={handleDelete}
             style={{ marginLeft: '5px' }}
           />
         </div>
         <div className={styles.contentRight}>
-          {type === 'array' && (
-            <VariableArrayInput
-              onChange={(variable) => handleChangeData(name, variable)}
-            />
-          )}
+          {type === 'array' && <VariableArrayInput name={name} />}
           {type === 'merge' && (
             <VariableMergeInput
               mergeItems={mergeItemsWithoutSelf}
-              onChange={(variable) => handleChangeData(name, variable)}
+              name={name}
             />
           )}
         </div>

@@ -1,20 +1,21 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import styles from '../styles/VariableInput.module.css';
 import { Select } from '@chakra-ui/select';
 import VariableArrayInput from './core/VariableArrayInput';
-import { IVar } from './core/VariableInput';
 import VariableMergeInput from './core/VariableMergeInput';
 import VariablePredefinedInput from './core/VariablePredefinedInput';
+import { Store } from '../utils/store';
 
 interface IProps {
   name: string;
-  onChange: (name: string, newValue?: IVar[] | string[] | string) => void;
-  onDelete?: () => void;
   mergeItems: string[];
 }
 
 const VariableInputElement: FC<IProps> = (props) => {
-  const { name, onChange, mergeItems } = props;
+  const { name, mergeItems } = props;
+
+  const { variables, setVariable } = useContext(Store);
+  const value = variables[name];
 
   const [type, setType] = useState<'string' | 'array' | 'merge' | 'predefined'>(
     'string'
@@ -31,18 +32,23 @@ const VariableInputElement: FC<IProps> = (props) => {
       | 'predefined';
     setType(newVal);
     if (newVal === 'string' || newVal === 'predefined') {
-      onChange(name, undefined);
+      setVariable(name, undefined);
     } else {
-      onChange(name, []);
+      setVariable(name, []);
     }
   };
 
-  const handleChangeData = (
-    name: string,
-    content: IVar[] | string[] | string | undefined
-  ) => {
-    onChange(name, content);
-  };
+  useEffect(() => {
+    if (typeof value === 'string') {
+      setType('predefined');
+    } else if (typeof value === 'object' && value.length > 0) {
+      if (typeof value[0] === 'string') {
+        setType('merge');
+      } else {
+        setType('array');
+      }
+    }
+  }, [value]);
 
   return (
     <>
@@ -64,22 +70,14 @@ const VariableInputElement: FC<IProps> = (props) => {
           </Select>
         </div>
         <div className={styles.contentRight}>
-          {type === 'array' && (
-            <VariableArrayInput
-              onChange={(variable) => handleChangeData(name, variable)}
-            />
-          )}
+          {type === 'array' && <VariableArrayInput name={name} />}
           {type === 'merge' && (
             <VariableMergeInput
               mergeItems={mergeItemsWithoutSelf}
-              onChange={(variable) => handleChangeData(name, variable)}
+              name={name}
             />
           )}
-          {type === 'predefined' && (
-            <VariablePredefinedInput
-              onChange={(variable) => handleChangeData(name, variable)}
-            />
-          )}
+          {type === 'predefined' && <VariablePredefinedInput name={name} />}
         </div>
       </div>
     </>
