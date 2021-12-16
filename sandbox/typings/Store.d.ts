@@ -24,6 +24,7 @@ export type IStoreTemplate = Descendant[];
 export interface IStoreData {
   template: IStoreTemplate;
   variables: IStoreVariables;
+  insertionMode: boolean;
 }
 
 export interface IStore extends IStoreData {
@@ -32,4 +33,5 @@ export interface IStore extends IStoreData {
     value: IStoreVariableValue
   ) => IStoreVariableValue;
   setTemplate: (value: IStoreTemplate) => IStoreTemplate;
+  setInsertionMode: (value: boolean) => boolean;
 }

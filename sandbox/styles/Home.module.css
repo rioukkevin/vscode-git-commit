@@ -1,5 +1,6 @@
 /* Black: #292A2B */
 /* White: #FDFFFF */
+/* Red: #DB4437 */
 
 .container {
   padding: 0;
@@ -13,8 +14,14 @@
   flex-wrap: nowrap;
 }
 
+.logo {
+  margin-top: -7px;
+  height: 50px;
+  display: inline;
+}
+
 .presentation {
-  margin: 40px 10px -40px 10px;
+  margin: 40px 0px 20px 0px;
 }
 
 .presentation > a {
@@ -25,6 +32,22 @@
 .presentation > a:hover {
   text-decoration-line: underline;
   text-decoration-thickness: 2px;
+}
+
+.stats {
+  position: relative;
+  display: flex;
+  margin-bottom: -40px;
+}
+
+.stats > img {
+  margin-right: 5px;
+}
+
+.default {
+  color: #808080;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
 }
 
 .line {

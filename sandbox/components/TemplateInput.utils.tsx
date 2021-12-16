@@ -24,6 +24,8 @@ export const Leaf = (props: LeafProps) => {
       // onClick={() => props.onClick!(props.children)}
       {...props.attributes}
       backgroundColor="#DB4437"
+      textColor="white"
+      style={{ padding: '0 5px', margin: '-2px 2px 0 2px' }}
     >
       {props.children}
     </Badge>

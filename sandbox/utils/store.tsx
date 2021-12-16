@@ -20,8 +20,10 @@ const DEFAULT_TEMPLATE: IStoreTemplate = [
 export const DEFAULT_VALUE: IStore = {
   template: DEFAULT_TEMPLATE,
   variables: {},
+  insertionMode: false,
   setVariable: () => [],
   setTemplate: () => [],
+  setInsertionMode: () => false,
 };
 
 export const Store = createContext<IStore>(DEFAULT_VALUE);
@@ -31,6 +33,7 @@ export const StoreProvider: FC<any> = (props) => {
   const [template, setTemplateState] =
     useState<IStore['template']>(DEFAULT_TEMPLATE);
   const [variables, setVariablesState] = useState<IStore['variables']>({});
+  const [insertionMode, setInsertionModeState] = useState(true);
 
   const setTemplate: IStore['setTemplate'] = (value) => {
     updateVariablesNames(value);
@@ -41,6 +44,11 @@ export const StoreProvider: FC<any> = (props) => {
     setVariablesState((oldValue) => {
       return { ...oldValue, [name]: value };
     });
+    return value;
+  };
+
+  const setInsertionMode: IStore['setInsertionMode'] = (value) => {
+    setInsertionModeState(value);
     return value;
   };
 
@@ -74,15 +82,6 @@ export const StoreProvider: FC<any> = (props) => {
     )[0];
 
     updateVariableName(oldChangedName, newChangedName);
-
-    // const keyer =
-    //   oldVariablesNames?.length > newVariablesNames?.length
-    //     ? oldVariablesNames
-    //     : newVariablesNames;
-
-    // keyer.map((_, i) => {
-
-    // });
   };
 
   return (
@@ -90,8 +89,10 @@ export const StoreProvider: FC<any> = (props) => {
       value={{
         template,
         variables,
+        insertionMode,
         setTemplate,
         setVariable,
+        setInsertionMode,
       }}
     >
       {props.children}
