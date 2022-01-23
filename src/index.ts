@@ -1,13 +1,11 @@
-import * as vscode from 'vscode';
-import './config/commitType';
+import { commands, window, ExtensionContext } from 'vscode';
 import { getRepo } from './utils/git';
 import { execute } from './scripts/run';
 import { Repository } from './typings/git';
 import { migrate } from './utils/migrate';
+import { getHasBeenInitialized, setHasBeenInitialized } from './utils/storage';
 
-export function activate(context: vscode.ExtensionContext) {
-  // GIT
-
+export function activate(context: ExtensionContext) {
   // Init
   console.log(
     'Congratulations, your extension "rioukkevin.vscode-git-commit" is now active!'
@@ -17,20 +15,31 @@ export function activate(context: vscode.ExtensionContext) {
   migrate();
 
   // CMD register
-  const disposable = vscode.commands.registerCommand(
+  const disposable = commands.registerCommand(
     'vscodeGitCommit.setMessage',
     (params) => {
-      vscode.commands.executeCommand('workbench.view.scm');
+      commands.executeCommand('workbench.view.scm');
       const repoUri =
         params?._quickDiffProvider?.repository?.repositoryRoot || undefined;
-      let repo: Repository = getRepo(repoUri);
-      setTimeout(async () => {
-        await execute(repo);
-        vscode.commands.executeCommand('workbench.scm.focus');
-      }, 200);
+      let repo: Repository | false = getRepo(repoUri);
+      if (!!repo) {
+        setTimeout(async () => {
+          await execute(repo as Repository);
+          commands.executeCommand('workbench.scm.focus');
+        }, 200);
+      }
     }
   );
   setTimeout(() => {
     context.subscriptions.push(disposable);
+    // TODO update, not working when reloading window
+    const isInitialized = getHasBeenInitialized(context);
+    if (!isInitialized) {
+      window.showInformationMessage(
+        'VSCode Git Commit message is initialized 😎'
+      );
+    } else {
+      setHasBeenInitialized(context, true);
+    }
   }, 1000);
 }

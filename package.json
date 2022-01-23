@@ -2,7 +2,7 @@
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
   "description": "Automatically generate git commit message with prefix",
-  "version": "2.1.1",
+  "version": "2.1.6",
   "engines": {
     "vscode": "^1.42.0"
   },
@@ -41,64 +41,13 @@
   ],
   "main": "./out/index.js",
   "activationEvents": [
-    "onCommand:vscodeGitCommit.setMessage"
+    "onCommand:vscodeGitCommit.setMessage",
+    "onStartupFinished"
   ],
   "contributes": {
     "configuration": {
       "title": "VSCode Git Commit",
       "properties": {
-        "vscodeGitCommit.customAlias": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "title": "Alias",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Alias name"
-              },
-              "description": {
-                "type": "string",
-                "description": "Description"
-              }
-            }
-          },
-          "default": [],
-          "markdownDescription": "Add prefix to extension (copy paste emoticons from here [Amp What](http://www.amp-what.com/unicode/search/icon))",
-          "deprecationMessage": "Deprecated: use vscodeGitCommit.variables instead, Migration put your aliases in variables.aliases as an array"
-        },
-        "vscodeGitCommit.messageTemplate": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "title": "Message Template"
-          },
-          "default": [
-            "{prefix}: {message}"
-          ],
-          "markdownDescription": "Add abilities to create custom message format, each variable is between mustaches and a prompt is automatically added to the workflow",
-          "deprecationMessage": "Deprecated: settings renamed as vscodeGitCommit.template"
-        },
-        "vscodeGitCommit.predefinedPrefix": {
-          "type": "string",
-          "default": "Creator Prefix",
-          "enum": [
-            "Creator Prefix",
-            "Angular",
-            "Semantic Commit Messages",
-            "Alpha8",
-            "none"
-          ],
-          "enumDescriptions": [
-            "My own choice of prefix",
-            "Angular commits",
-            "Semantic commits",
-            "Alpha8, commitizen based commits",
-            "No prefix predefined"
-          ],
-          "markdownDescription": "Select predefined prefix (Live update) (Options: Creator Prefix / [Angular](https://github.com/angular/angular/blob/master/CONTRIBUTING.md) / [Semantic Commit Messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) / [Alpha8](https://github.com/commitizen-tools/commitizen/blob/master/commitizen/cz/conventional_commits/conventional_commits.py) / none",
-          "deprecationMessage": "Deprecated: use vscodeGitCommit.variables instead"
-        },
         "vscodeGitCommit.insertMode": {
           "type": "string",
           "default": "Concatenate",
@@ -125,21 +74,33 @@
         },
         "vscodeGitCommit.variables": {
           "type": "object",
-          "uniqueItems": true,
           "markdownDescription": "Define variables that use QuickPick, **if a variable is not defined, a Text input will be displayed**",
-          "pattern": "/[a-z0-9]{1,}/g",
-          "anyOf": [
-            {
-              "key": "string",
-              "label": "string",
-              "detail": "string"
-            },
-            {
-              "key": "string",
-              "label": "string"
-            },
-            "string"
-          ]
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "items": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "detail": {
+                      "type": "string"
+                    },
+                    "label": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "label"
+                  ],
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            ]
+          }
         }
       }
     },
@@ -171,27 +132,25 @@
     ]
   },
   "scripts": {
-    "extension:prepublish": "npm run extension:compile",
-    "extension:compile": "tsc -p ./",
-    "extension:lint": "eslint src --ext ts --fix",
+    "compile": "tsc -p ./",
+    "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -watch -p ./",
-    "extension:build": "vsce package",
-    "extension:install": "code --install-extension vscode-git-commit-2.1.1.vsix",
-    "extension:pretest": "npm run compile && npm run lint",
-    "extension:local": "yarn extension:compile && yarn extension:build && yarn extension:install"
+    "md:concatenate": "node ./scripts/mdConcatenate.js",
+    "extension:prepublish": "npm run extension:compile",
+    "extension:build": "yarn md:concatenate && tsc -p ./",
+    "extension:lint": "eslint src --ext ts --fix",
+    "extension:pack": "vsce package",
+    "extension:rm": "rm ./vscode-git-commit-2.1.5.vsix",
+    "extension:install": "code --install-extension vscode-git-commit-2.1.6.vsix",
+    "extension:pretest": "npm run extension:compile && npm run lint",
+    "extension:local": "yarn extension:rm && yarn extension:build && yarn extension:pack && yarn extension:install"
   },
   "devDependencies": {
-    "@types/glob": "^7.1.1",
-    "@types/mocha": "^7.0.1",
-    "@types/node": "^12.11.7",
-    "@types/vscode": "^1.42.0",
-    "@typescript-eslint/eslint-plugin": "^2.18.0",
-    "@typescript-eslint/parser": "^2.18.0",
-    "eslint": "^6.8.0",
-    "glob": "^7.1.6",
-    "mocha": "^7.0.1",
-    "typescript": "^3.7.5",
-    "vscode-test": "^1.3.0"
-  },
-  "dependencies": {}
+    "@types/node": "^12.12.0",
+    "@types/vscode": "^1.34.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.0",
+    "@typescript-eslint/parser": "^4.16.0",
+    "eslint": "^7.21.0",
+    "typescript": "^4.2.2"
+  }
 }

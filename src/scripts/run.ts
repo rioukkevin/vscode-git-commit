@@ -1,5 +1,5 @@
 import { Repository } from '../typings/git';
-import { IQuickPickItem } from '../typings/quickPick';
+import { IQuickPickSettings } from '../typings/quickPick';
 import { useQuickPick, useQuickText } from '../utils/actions';
 import { setGitMessage } from '../utils/git';
 import { getTemplate, getVariables } from '../utils/settings';
@@ -31,7 +31,7 @@ export const execute = async (repo: Repository) => {
         placeHolder: `Please type the value for <${v}>`,
       });
     } else {
-      const choices: IQuickPickItem[] = parseVariable(repo, v);
+      const choices: IQuickPickSettings[] = parseVariable(repo, v);
       result.value = await useQuickPick(
         {
           ignoreFocusOut: true,

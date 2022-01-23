@@ -1,17 +1,17 @@
-import * as vscode from 'vscode';
-import { getMode } from './settings';
+import { window, extensions, scm } from 'vscode';
 import { GitExtension, Repository } from '../typings/git';
+import { getMode } from './settings';
 
 function getGitExtension() {
-  const vscodeGit = vscode.extensions.getExtension<GitExtension>('vscode.git');
+  const vscodeGit = extensions.getExtension<GitExtension>('vscode.git');
   const gitExtension = vscodeGit && vscodeGit.exports;
   return gitExtension;
 }
 
-export const getRepo = (repoUri: string): any => {
+export const getRepo = (repoUri: string): Repository | false => {
   const gitExtension = getGitExtension();
   if (!gitExtension?.enabled) {
-    vscode.window.showErrorMessage(
+    window.showErrorMessage(
       'Git extensions are not currently enabled, please try again after enabled!'
     );
     return false;

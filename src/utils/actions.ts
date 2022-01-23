@@ -1,18 +1,15 @@
-import * as vscode from 'vscode';
+import { window } from 'vscode';
 import { InputBoxOptions, QuickPickOptions } from 'vscode';
-
-interface IValues {
-  label: string;
-  key: string | number;
-  detail: string;
-}
+import { IQuickPickSettings } from '../typings/quickPick';
+import { konsole } from './feedback';
 
 export const useQuickPick = async (
-  params: vscode.QuickPickOptions,
-  values: IValues[]
+  params: QuickPickOptions,
+  values: IQuickPickSettings[]
 ): Promise<string> => {
-  const value = await vscode.window.showQuickPick(values, params);
+  const value = await window.showQuickPick(values, params);
   if (!value) {
+    konsole.error('Message is cancel');
     throw new Error('Empty');
   }
   return value.label;
@@ -21,8 +18,9 @@ export const useQuickPick = async (
 export const useQuickText = async (
   params: InputBoxOptions
 ): Promise<string> => {
-  const message = await vscode.window.showInputBox(params);
+  const message = await window.showInputBox(params);
   if (!message) {
+    konsole.error('Message is cancel');
     throw new Error('Empty');
   }
   return message;

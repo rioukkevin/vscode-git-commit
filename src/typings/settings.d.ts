@@ -1,9 +1,6 @@
-import { IQuickPickItem } from './quickPick';
+import { IQuickPickSettings } from './quickPick';
 
-type ISettingVariable =
-  | string
-  | Pick<IQuickPickItem, 'key' | 'label'>[]
-  | Pick<IQuickPickItem, 'key' | 'label' | 'detail'>[];
+type ISettingVariable = string | IQuickPickSettings[];
 
 type ISettingVariables = {
   [key: string]: ISettingVariable;
