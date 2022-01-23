@@ -1,4 +1,4 @@
-import { workspace, ExtensionContext } from 'vscode';
+import { workspace } from 'vscode';
 import { EXTENSION_NAME } from '../config/const';
 import { ISettingVariables } from '../typings/settings';
 

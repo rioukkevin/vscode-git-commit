@@ -5,6 +5,7 @@ import VariableArrayInput from './core/VariableArrayInput';
 import VariableMergeInput from './core/VariableMergeInput';
 import VariablePredefinedInput from './core/VariablePredefinedInput';
 import { Store } from '../utils/store';
+import VariableFileInput from './core/VariableFileInput';
 
 interface IProps {
   name: string;
@@ -17,9 +18,9 @@ const VariableInputElement: FC<IProps> = (props) => {
   const { variables, setVariable } = useContext(Store);
   const value = variables[name];
 
-  const [type, setType] = useState<'string' | 'array' | 'merge' | 'predefined'>(
-    'string'
-  );
+  const [type, setType] = useState<
+    'string' | 'array' | 'merge' | 'predefined' | 'files'
+  >('string');
 
   const mergeItemsWithoutSelf = mergeItems.filter((a) => a !== name);
 
@@ -29,9 +30,10 @@ const VariableInputElement: FC<IProps> = (props) => {
       | 'string'
       | 'array'
       | 'merge'
-      | 'predefined';
+      | 'predefined'
+      | 'files';
     setType(newVal);
-    if (newVal === 'string' || newVal === 'predefined') {
+    if (newVal === 'string' || newVal === 'predefined' || newVal === 'files') {
       setVariable(name, undefined);
     } else {
       setVariable(name, []);
@@ -40,7 +42,11 @@ const VariableInputElement: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (typeof value === 'string') {
-      setType('predefined');
+      if (value.startsWith('files')) {
+        setType('files');
+      } else {
+        setType('predefined');
+      }
     } else if (typeof value === 'object' && value.length > 0) {
       if (typeof value[0] === 'string') {
         setType('merge');
@@ -67,6 +73,7 @@ const VariableInputElement: FC<IProps> = (props) => {
             <option value="array">Array</option>
             <option value="merge">Merge</option>
             <option value="predefined">Predefined</option>
+            <option value="files">Files</option>
           </Select>
         </div>
         <div className={styles.contentRight}>
@@ -78,6 +85,7 @@ const VariableInputElement: FC<IProps> = (props) => {
             />
           )}
           {type === 'predefined' && <VariablePredefinedInput name={name} />}
+          {type === 'files' && <VariableFileInput name={name} />}
         </div>
       </div>
     </>

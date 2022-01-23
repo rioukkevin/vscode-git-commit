@@ -1,4 +1,4 @@
-import { window, extensions, scm } from 'vscode';
+import { window, extensions } from 'vscode';
 import { GitExtension, Repository } from '../typings/git';
 import { getMode } from './settings';
 
