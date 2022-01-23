@@ -1,4 +1,4 @@
-import { getLocalPreset } from '../config/presets';
+import { Repository } from '../typings/git';
 import { IQuickPickItem } from '../typings/quickPick';
 import { useQuickPick, useQuickText } from '../utils/actions';
 import { setGitMessage } from '../utils/git';
@@ -10,7 +10,7 @@ import {
 } from '../utils/template';
 import { parseVariable } from '../utils/variables';
 
-export const execute = async (repo: any) => {
+export const execute = async (repo: Repository) => {
   const template = getTemplate();
 
   const variables = templateParser(template || '{prefix}: {message}');
@@ -31,7 +31,7 @@ export const execute = async (repo: any) => {
         placeHolder: `Please type the value for <${v}>`,
       });
     } else {
-      const choices: IQuickPickItem[] = parseVariable(v);
+      const choices: IQuickPickItem[] = parseVariable(repo, v);
       result.value = await useQuickPick(
         {
           ignoreFocusOut: true,
@@ -45,8 +45,6 @@ export const execute = async (repo: any) => {
     }
     variablesReplacement.push(result);
   }
-  console.log('VGC', variablesReplacement);
-  // Workflow messages
 
   if (variablesReplacement.length >= variables.length) {
     setGitMessage(

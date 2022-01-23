@@ -16,7 +16,7 @@ export interface InputBox {
 export const enum RefType {
   Head,
   RemoteHead,
-  Tag
+  Tag,
 }
 
 export interface Ref {
@@ -76,7 +76,7 @@ export const enum Status {
   DELETED_BY_THEM,
   BOTH_ADDED,
   BOTH_DELETED,
-  BOTH_MODIFIED
+  BOTH_MODIFIED,
 }
 
 export interface Change {
@@ -119,7 +119,7 @@ export interface LogOptions {
 }
 
 export interface Repository {
-  readonly  _repository: any;
+  readonly _repository: any;
   readonly rootUri: Uri;
   readonly inputBox: InputBox;
   readonly state: RepositoryState;
@@ -241,5 +241,5 @@ export const enum GitErrorCodes {
   CantLockRef = 'CantLockRef',
   CantRebaseMultipleBranches = 'CantRebaseMultipleBranches',
   PatchDoesNotApply = 'PatchDoesNotApply',
-  NoPathFound = 'NoPathFound'
+  NoPathFound = 'NoPathFound',
 }
