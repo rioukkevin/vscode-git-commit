@@ -64,6 +64,7 @@ For each variables defined in the template above, you can define the content:
 #### If you write your own Array:
 
 - The 'detail' property is optionnal
+- The 'label' property is used as the content include in template
 - (For old users) The 'id' property is now automatically generated and not used anymore by the extension
 
 #### If you want predefined choices:

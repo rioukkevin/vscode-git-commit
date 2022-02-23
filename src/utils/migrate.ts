@@ -1,14 +1,7 @@
+import { isArray } from 'util';
 import { workspace } from 'vscode';
 import { EXTENSION_NAME } from '../config/const';
 import { getVariables } from './settings';
-
-// const prefixNameAggregation: { [key: string]: any } = {
-//   'Creator Prefix': 'keke',
-//   Angular: 'angular',
-//   'Semantic Commit Messages': 'semantic',
-//   Alpha8: 'alpha8',
-//   none: 'none',
-// };
 
 export const migrate = () => {
   // V2 to V2.1
@@ -25,5 +18,24 @@ export const migrate = () => {
       .getConfiguration(EXTENSION_NAME)
       .update('variables', newVariables, true);
     console.log('MIGRATION TEMPLATE V2 -> V2.1');
+  }
+
+  const v2Variables = getVariables();
+
+  // V2.1/2 to V3
+  if (v2Variables) {
+    const newVariables = Object.keys(v2Variables).map((key) => {
+      const oldData = v2Variables[key];
+      if (Array.isArray(oldData)) {
+        return oldData.map((d) => ({
+          label: d.label,
+          detail: d.detail,
+        }));
+      }
+    });
+    workspace
+      .getConfiguration(EXTENSION_NAME)
+      .update('variables', newVariables, true);
+    console.log('MIGRATION TEMPLATE V2.1/2 -> V3');
   }
 };

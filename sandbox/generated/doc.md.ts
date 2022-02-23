@@ -105,6 +105,7 @@ For each variables defined in the template above, you can define the content:
 #### If you write your own Array:
 
 - The 'detail' property is optionnal
+- The 'label' property is used as the content include in template
 - (For old users) The 'id' property is now automatically generated and not used anymore by the extension
 
 #### If you want predefined choices:
@@ -131,7 +132,13 @@ For each variables defined in the template above, you can define the content:
 
 # Contributing to the extension
 
-You just have to create a pull-request 😉
+#### Share configs
+
+You can share the config you made for you by creating a pull request, in the folder 'share' you can find a Readme as a template and an example made by [jycouet](https://github.com/jycouet)
+
+#### Contributing to code base
+
+You just have to create a pull-request 😉 with what you want and a clear description of the goal of your feature
 
 # Changelog
 
