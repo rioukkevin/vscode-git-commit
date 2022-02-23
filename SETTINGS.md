@@ -1,37 +1,89 @@
 # Settings
 
-### 1. **Erase previous commit on new one** (`vscodeGitCommit.insertMode`)
+### UI
 
-![scm](./assets/settings/insertMode.png)
+An UI is available [HERE](https://gcm-config.netlify.app/configurator), it's not the best UI but it can help you make your first configuration for the extension
 
-Options:
+**Hosted on Netlify**
 
-- Concatenate
-- Replace
+### **Erase previous commit on new one** (`vscodeGitCommit.insertMode`)
 
-### 2. **Create my own template message** (`vscodeGitCommit.template`)
+```json
+{
+  "vscodeGitCommit.insertMode": "Concatenate"
+}
+```
 
-![scm](./assets/settings/template.png)
+'Concatenate' give the ability to use multiple message in the same commit where 'Replace' not
 
-> Each entry of the array is a new line in message template
+### **Create my own template message** (`vscodeGitCommit.template`)
 
-> Variables are automatically prompted
+```json
+{
+  "vscodeGitCommit.template": [
+    "{feat}({scope}): {message}"
+    "by {author}"
+  ]
+}
+```
 
-> You can create as many lines as you want and as many variables as you want.
+By defining one string, you create a line, with two strings like in the example, you define two line for the template.
 
-### 3. **Use select or text for each variables** (`vscodeGitCommit.messageTemplate`)
+You can define dynamic content by using _{_ & _}_ in doc, I called it a variable.
 
-![scm](./assets/settings/variables.png)
+When triggering this extension, a value for each variable is prompt.
 
-> Each entry of the array is a variable used in template
+### **Use select or text for each variables** (`vscodeGitCommit.messageTemplate`)
 
-> Variables are automatically prompted, if you give an array of elements, a select is displayed, else if you give a string, it takes one of presets saved in the extension (in the future files list for example)
-> Available presets for variables are **alpha8 semantic keke angular**
+```json
+{
+  "vscodeGitCommit.variables": {
+    "author": [
+      {
+        "label": "Devs",
+        "detail": "Use when a change is made by Developers"
+      },
+      {
+        "label": "Ops"
+      }
+    ],
+    "feat": "keke"
+  }
+}
+```
 
-> You can create as many lines as you want and as many variables as you want.
+For each variables defined in the template above, you can define the content:
 
-> If a variable is not defined in this setting but defined in template setting, a text input is displayed
+- If not set -> Free string input
+- If it's an Array -> A select of choices is displayed
+- If it's a string three possibilities
+  - the value is oneOf 'keke' | 'angular' | 'semantic' | 'alpha8' -> A predefined Array is associated to the variable
+  - the value startWith 'files' -> An array of files with defined status is displayed as choices
+  - the value looks like '<<something>>...<<something_else>>' -> a merge of array between the variable 'something' and 'something_else' is created as choices
 
-> `!NEW!` If a variable need content of an other one, you can use the operator `...` to merge multiple variables let me explain it with an example above (prefix variable is combining firstly the **aliases** and secondly the preset **alpha8**)
+#### If you write your own Array:
 
-![scm](./assets/settings/variablesMerge.png)
+- The 'detail' property is optionnal
+- (For old users) The 'id' property is now automatically generated and not used anymore by the extension
+
+#### If you want predefined choices:
+
+- 'keke' is the prefix I use personnally
+- 'angular' is prefix specific to angular repos (HELP: if someone has a full config for angular commits, can you share it with me by creating a PR or Issue ?)
+- 'alpha8' is prefix we used in the enterprise where I work
+- 'semantic' is an other normalization of prefix but I lost the link associated :/
+
+#### If you want to list files many possibilities are yours:
+
+- 'files': All staged and changed files
+- 'files.deleted': All deleted staged and changed files
+- 'files.modified': All modified staged and changed files
+- 'files.added': All added staged and changed files
+- 'files.staged': All staged files
+- 'files.staged.deleted': All deleted staged files
+- 'files.staged.modified': All modified staged files
+- 'files.staged.added': All added staged files
+- 'files.changed': All changed files
+- 'files.changed.deleted': All deleted changed files
+- 'files.changed.modified': All modified changed files
+- 'files.changed.added': All added changed files

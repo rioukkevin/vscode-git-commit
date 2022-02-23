@@ -1,6 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Store } from '../../utils/store';
-import { PREDEFINED_PREFIX } from '../../utils/variables';
 import SelectString from './SelectString';
 
 interface IProps {
@@ -8,6 +7,9 @@ interface IProps {
 }
 
 type TVariable = string | undefined;
+
+const FILE_STATUS = ['staged', 'changed'];
+const FILE_ACTIONS = ['deleted', 'updated', 'added'];
 
 const VariableFileInput: FC<IProps> = (props) => {
   const { name } = props;
@@ -23,31 +25,38 @@ const VariableFileInput: FC<IProps> = (props) => {
   useEffect(() => {
     if (typeof value === 'string') {
       const parts = value?.split('.');
-      setFilesStatus(parts[1]);
-      setFilesActions(parts[2]);
+      if (parts[2]) {
+        setFilesStatus(parts[1]);
+        setFilesActions(parts[2]);
+      } else {
+        if (FILE_STATUS.includes(parts[1])) {
+          setFilesStatus(parts[1]);
+        } else if (FILE_ACTIONS.includes(parts[1])) {
+          setFilesActions(parts[1]);
+        }
+      }
     }
   }, [value]);
 
+  useEffect(() => {
+    handleChange(undefined, undefined);
+  }, []);
+
   // update from bottom
   const handleChange = (status: TVariable, actions: TVariable) => {
-    let base = 'files';
-    if (status) {
-      base += `.${status}`;
-    }
-    if (actions) {
-      base += `.${actions}`;
-    }
-    setVariable(name, base);
+    const base = 'files';
+
+    console.log('CHANGE', status, actions);
+
+    const stringified = `${base}${status ? `.${status}` : ''}${
+      actions ? `.${actions}` : ''
+    }`;
+    setVariable(name, stringified);
   };
 
   const handleChangeStatus = (v: TVariable) => {
     setFilesStatus(v);
-    if (!v) {
-      setFilesActions(undefined);
-      handleChange(v, undefined);
-    } else {
-      handleChange(v, filesActions);
-    }
+    handleChange(v, filesActions);
   };
 
   const handleChangeActions = (v: TVariable) => {
@@ -59,16 +68,14 @@ const VariableFileInput: FC<IProps> = (props) => {
     <>
       <SelectString
         value={filesStatus}
-        mergeItems={['staged', 'changed']}
+        mergeItems={FILE_STATUS}
         onChange={handleChangeStatus}
       />
-      {filesStatus && (
-        <SelectString
-          value={filesActions}
-          mergeItems={['deleted', 'updated', 'added']}
-          onChange={handleChangeActions}
-        />
-      )}
+      <SelectString
+        value={filesActions}
+        mergeItems={FILE_ACTIONS}
+        onChange={handleChangeActions}
+      />
     </>
   );
 };

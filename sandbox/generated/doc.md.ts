@@ -1,4 +1,5 @@
-![demo](./assets/demo.gif)
+
+export const doc = `![demo](./assets/demo.gif)
 
 ![version](https://vsmarketplacebadge.apphb.com/version-short/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
 ![install](https://vsmarketplacebadge.apphb.com/installs/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
@@ -8,11 +9,11 @@
 
 This extension is an extension made to formalize git commit messages. By using a template and variables, you can define how the commit message needs to looks and which data you want in this message.
 
-By example: When you want to specify a **scope** in your commits, you can create a variable named scope in th e template like this `{scope}`
+By example: When you want to specify a **scope** in your commits, you can create a variable named scope in th e template like this \`{scope}\`
 
 If you want to specify which data you want in this scope variable, you can specify it with the variable settings
 
-```json
+\`\`\`json
 {
   "scope": [
     {
@@ -26,7 +27,7 @@ If you want to specify which data you want in this scope variable, you can speci
     }
   ]
 }
-```
+\`\`\`
 
 I show you more on the #Settings part
 
@@ -34,7 +35,7 @@ I show you more on the #Settings part
 
 ## How to use it ?
 
-Use _ctrl_+_alt_+_enter_ (_cmd_+_shift_+_enter_ on Mac) or `click` on the icon in SouceControl
+Use _ctrl_+_alt_+_enter_ (_cmd_+_shift_+_enter_ on Mac) or \`click\` on the icon in SouceControl
 ![bl](./assets/icon_black.png)
 ![li](./assets/icon_light.png)
 
@@ -46,26 +47,26 @@ An UI is available [HERE](https://gcm-config.netlify.app/configurator), it's not
 
 **Hosted on Netlify**
 
-### **Erase previous commit on new one** (`vscodeGitCommit.insertMode`)
+### **Erase previous commit on new one** (\`vscodeGitCommit.insertMode\`)
 
-```json
+\`\`\`json
 {
   "vscodeGitCommit.insertMode": "Concatenate"
 }
-```
+\`\`\`
 
 'Concatenate' give the ability to use multiple message in the same commit where 'Replace' not
 
-### **Create my own template message** (`vscodeGitCommit.template`)
+### **Create my own template message** (\`vscodeGitCommit.template\`)
 
-```json
+\`\`\`json
 {
   "vscodeGitCommit.template": [
     "{feat}({scope}): {message}"
     "by {author}"
   ]
 }
-```
+\`\`\`
 
 By defining one string, you create a line, with two strings like in the example, you define two line for the template.
 
@@ -73,9 +74,9 @@ You can define dynamic content by using _{_ & _}_ in doc, I called it a variable
 
 When triggering this extension, a value for each variable is prompt.
 
-### **Use select or text for each variables** (`vscodeGitCommit.messageTemplate`)
+### **Use select or text for each variables** (\`vscodeGitCommit.messageTemplate\`)
 
-```json
+\`\`\`json
 {
   "vscodeGitCommit.variables": {
     "author": [
@@ -90,7 +91,7 @@ When triggering this extension, a value for each variable is prompt.
     "feat": "keke"
   }
 }
-```
+\`\`\`
 
 For each variables defined in the template above, you can define the content:
 
@@ -209,3 +210,4 @@ You just have to create a pull-request 😉
 #### **0.0.1** (_08-18-2020_):
 
 - Initial release
+`

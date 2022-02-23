@@ -38,7 +38,6 @@ export function activate(context: ExtensionContext) {
       window.showInformationMessage(
         'VSCode Git Commit message is initialized 😎'
       );
-    } else {
       setHasBeenInitialized(context, true);
     }
   }, 1000);

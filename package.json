@@ -1,14 +1,14 @@
 {
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
-  "description": "Automatically generate git commit message with prefix",
-  "version": "2.1.6",
+  "description": "Harmonize your git commit message with your colleagues",
+  "version": "2.1.14",
   "engines": {
     "vscode": "^1.42.0"
   },
   "publisher": "rioukkevin",
   "license": "MIT",
-  "homepage": "https://kevin.riou.pro",
+  "homepage": "https://gcm-config.netlify.app",
   "bugs": {
     "url": "https://github.com/rioukkevin/vscode-git-commit/issues"
   },
@@ -74,6 +74,9 @@
         },
         "vscodeGitCommit.variables": {
           "type": "object",
+          "default": {
+            "prefix": "keke"
+          },
           "markdownDescription": "Define variables that use QuickPick, **if a variable is not defined, a Text input will be displayed**",
           "additionalProperties": {
             "anyOf": [
@@ -136,12 +139,14 @@
     "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -watch -p ./",
     "md:concatenate": "node ./scripts/mdConcatenate.js",
+    "md:copy": "node ./scripts/mdCopySandbox.js && rm -rf ./sandbox/public/assets || true && cp -R ./assets ./sandbox/public/assets",
+    "md": "yarn md:concatenate && yarn md:copy",
     "extension:prepublish": "npm run extension:compile",
     "extension:build": "yarn md:concatenate && tsc -p ./",
     "extension:lint": "eslint src --ext ts --fix",
     "extension:pack": "vsce package",
-    "extension:rm": "rm ./vscode-git-commit-2.1.5.vsix",
-    "extension:install": "code --install-extension vscode-git-commit-2.1.6.vsix",
+    "extension:rm": "rm ./vscode-git-commit-2.1.6.vsix",
+    "extension:install": "code --install-extension vscode-git-commit-2.1.14.vsix",
     "extension:pretest": "npm run extension:compile && npm run lint",
     "extension:local": "yarn extension:rm && yarn extension:build && yarn extension:pack && yarn extension:install"
   },
@@ -152,5 +157,12 @@
     "@typescript-eslint/parser": "^4.16.0",
     "eslint": "^7.21.0",
     "typescript": "^4.2.2"
+  },
+  "dependencies": {
+    "rehype": "^12.0.1",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-components": "marekweb/rehype-components",
+    "rehype-slug": "^5.0.1",
+    "remark-toc": "^8.0.1"
   }
 }
