@@ -3,7 +3,7 @@ import { getRepo } from './utils/git';
 import { execute } from './scripts/run';
 import { Repository } from './typings/git';
 import { migrate } from './utils/migrate';
-import { getHasBeenInitialized, setHasBeenInitialized } from './utils/storage';
+import { isUpToDate } from './utils/storage';
 
 export function activate(context: ExtensionContext) {
   // Init
@@ -32,13 +32,7 @@ export function activate(context: ExtensionContext) {
   );
   setTimeout(() => {
     context.subscriptions.push(disposable);
-    // TODO update, not working when reloading window
-    const isInitialized = getHasBeenInitialized(context);
-    if (!isInitialized) {
-      window.showInformationMessage(
-        'VSCode Git Commit message is initialized 😎'
-      );
-      setHasBeenInitialized(context, true);
-    }
+
+    isUpToDate(context, window);
   }, 1000);
 }
