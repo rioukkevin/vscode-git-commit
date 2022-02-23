@@ -160,11 +160,6 @@
     "typescript": "^4.2.2"
   },
   "dependencies": {
-    "rehype": "^12.0.1",
-    "rehype-autolink-headings": "^6.1.1",
-    "rehype-components": "marekweb/rehype-components",
-    "rehype-slug": "^5.0.1",
-    "remark-toc": "^8.0.1",
     "semver": "^7.3.5"
   }
 }
