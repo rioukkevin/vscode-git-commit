@@ -1,5 +1,9 @@
 # Changelog
 
+#### **3.0.1** (_02-24-2022_):
+
+- 🐞fix: settings migration script fix from V3.0.0
+
 > third release with an UI O_o and a lot of new features (btw: we reached the 5k installs THX U ♥️)
 
 #### **3.0.0** (_02-23-2022_):

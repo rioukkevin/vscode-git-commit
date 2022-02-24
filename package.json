@@ -2,7 +2,7 @@
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
   "description": "Harmonize your git commit message with your colleagues",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "engines": {
     "vscode": "^1.42.0"
   },
@@ -145,8 +145,8 @@
     "extension:build": "yarn md:concatenate && tsc -p ./",
     "extension:lint": "eslint src --ext ts --fix",
     "extension:pack": "vsce package",
-    "extension:rm": "rm -f ./vscode-git-commit-2.1.19.vsix",
-    "extension:install": "code --install-extension vscode-git-commit-3.0.0.vsix",
+    "extension:rm": "rm -f ./vscode-git-commit-3.0.0.vsix",
+    "extension:install": "code --install-extension vscode-git-commit-3.0.1.vsix",
     "extension:pretest": "npm run extension:compile && npm run lint",
     "extension:local": "yarn extension:rm && yarn extension:build && yarn extension:pack && yarn extension:install"
   },

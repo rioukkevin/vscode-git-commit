@@ -12,7 +12,7 @@ export function activate(context: ExtensionContext) {
   );
 
   // MIGRATION
-  migrate();
+  migrate(context);
 
   // CMD register
   const disposable = commands.registerCommand(
