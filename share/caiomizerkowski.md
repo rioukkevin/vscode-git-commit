@@ -5,9 +5,7 @@ Added by: [CaioMizerkowski](https://github.com/CaioMizerkowski)
 Settings:
 
 ```json
-"vscodeGitCommit.template": ["{icon}: {message}
-made by Caio Mizerkowski
-for {type}"],
+"vscodeGitCommit.template": ["{icon}: {message}\nmade by Caio Mizerkowski\nfor {type}"],
 "vscodeGitCommit.variables": {
   "icon": "aliasesIcons",
   "aliasesIcons": [
