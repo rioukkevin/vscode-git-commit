@@ -7,6 +7,8 @@ Settings:
 ```json
 "vscodeGitCommit.template": ["{icon}: {message}\nmade by Caio Mizerkowski\nfor {type}"],
 "vscodeGitCommit.variables": {
+
+  "prefix": "keke",
   "icon": "aliasesIcons",
   "aliasesIcons": [
     {
@@ -150,7 +152,7 @@ Settings:
       "label": "studies"
     },
     {
-      "label": "friend"
+      "label": "friends"
     },
     {
       "label": "college"
