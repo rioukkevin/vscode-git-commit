@@ -7,143 +7,143 @@ export const QUICKPICKITEMSKEKE: Array<IQuickPickSettings> = [
     detail: 'Select when creating new things',
   },
   {
-    label: '🐞fix',
+    label: '🐞 fix',
     detail: 'Select when fixing a bug',
   },
   {
-    label: '📄docs',
+    label: '📄 docs',
     detail: 'Select when editing documentation',
   },
   {
-    label: '🖥️wip',
+    label: '🖥️ wip',
     detail: 'Select when work is not finished',
   },
   {
-    label: '🚅perfs',
+    label: '🚅 perfs',
     detail: 'Select when working on performances',
   },
   {
-    label: '⏪rollback',
+    label: '⏪ rollback',
     detail: 'Select when undoing something',
   },
   {
-    label: '🔵other',
+    label: '🔵 other',
     detail: 'Select when fixing a bug',
   },
 ];
 
 export const QUICKPICKITEMSANGULAR: Array<IQuickPickSettings> = [
   {
-    label: '✨feat',
+    label: '✨ feat',
     detail: 'Select when creating new things',
   },
   {
-    label: '🐞fix',
+    label: '🐞 fix',
     detail: 'Select when fixing a bug',
   },
   {
-    label: '📄docs',
+    label: '📄 docs',
     detail: 'Select when editing documentation',
   },
   {
-    label: '🚀ci',
+    label: '🚀 ci',
     detail: 'Select when editing CI scripts',
   },
   {
-    label: '🖥️build',
+    label: '🖥️ build',
     detail: 'Select when concerning build change or external dependencies',
   },
   {
-    label: '⚙️refactor',
+    label: '⚙️ refactor',
     detail: 'Select when no new performances or no new functionnality',
   },
   {
-    label: '🌈style',
+    label: '🌈 style',
     detail: 'Select when working on code style',
   },
   {
-    label: '⚡perf',
+    label: '⚡ perf',
     detail: 'Select when working on performances',
   },
   {
-    label: '⏪revert',
+    label: '⏪ revert',
     detail: 'Select when going back',
   },
   {
-    label: '🔵test',
+    label: '🔵 test',
     detail: 'Select when adding or editing tests',
   },
 ];
 
 export const QUICKPICKITEMSSEMANTIC: Array<IQuickPickSettings> = [
   {
-    label: '✨feat',
+    label: '✨ feat',
     detail: 'new feature for the user, not a new feature for build script',
   },
   {
-    label: '🐞fix',
+    label: '🐞 fix',
     detail: 'bug fix for the user, not a fix to a build script',
   },
   {
-    label: '📄docs',
+    label: '📄 docs',
     detail: 'changes to the documentation',
   },
   {
-    label: '🌈style',
+    label: '🌈 style',
     detail: 'formatting, missing semi colons, etc; no production code change',
   },
   {
-    label: '⚙️refactor',
+    label: '⚙️ refactor',
     detail: 'refactoring production code, eg. renaming a variable',
   },
   {
-    label: '🔵test',
+    label: '🔵 test',
     detail:
       'adding missing tests, refactoring tests; no production code change',
   },
   {
-    label: '🚀chore',
+    label: '🚀 chore',
     detail: 'updating grunt tasks etc; no production code change',
   },
 ];
 
 export const QUICKPICKITEMSALPHA8: Array<IQuickPickSettings> = [
   {
-    label: '✨feat',
+    label: '✨ feat',
     detail: 'A new feature. Correlates with MINOR in SemVer',
   },
   {
-    label: '🐞fix',
+    label: '🐞 fix',
     detail: 'A bug fix. Correlates with PATCH in SemVer',
   },
   {
-    label: '📄docs',
+    label: '📄 docs',
     detail: 'Documentation only changes',
   },
   {
-    label: '🌈style',
+    label: '🌈 style',
     detail:
       'Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)',
   },
   {
-    label: '⚙️refactor',
+    label: '⚙️ refactor',
     detail: 'A code change that neither fixes a bug nor adds a feature',
   },
   {
-    label: '🕜perf',
+    label: '🕜 perf',
     detail: 'A code change that improves performance',
   },
   {
-    label: '🧪test',
+    label: '🧪 test',
     detail: 'Adding missing or correcting existing tests',
   },
   {
-    label: '🏗️build',
+    label: '🏗️ build',
     detail:
       'Changes that affect the build system or external dependencies (example scopes: pip, docker, npm)',
   },
   {
-    label: '🤹ci',
+    label: '🤹 ci',
     detail:
       'Changes to our CI configuration files and scripts (example scopes: GitLabCI)',
   },
