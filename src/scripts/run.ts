@@ -25,12 +25,7 @@ export const execute = async (repo: Repository) => {
       key: v,
       value: '',
     };
-    if (!variableValue) {
-      result.value = await useQuickText({
-        ignoreFocusOut: true,
-        placeHolder: `Please type the value for <${v}>`,
-      });
-    } else {
+    if (Array.isArray(variableValue)) {
       const choices: IQuickPickSettings[] = parseVariable(repo, v);
       result.value = await useQuickPick(
         {
@@ -42,6 +37,12 @@ export const execute = async (repo: Repository) => {
           detail: c.detail ?? '',
         }))
       );
+    } else {
+      result.value = await useQuickText({
+        value: variableValue,
+        ignoreFocusOut: true,
+        placeHolder: `Please type the value for <${v}>`,
+      });
     }
     variablesReplacement.push(result);
   }

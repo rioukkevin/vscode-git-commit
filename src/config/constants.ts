@@ -3,7 +3,7 @@ import { EXTENSION_NAME } from './const';
 
 export const QUICKPICKITEMSKEKE: Array<IQuickPickSettings> = [
   {
-    label: '✨feature',
+    label: '✨ feature',
     detail: 'Select when creating new things',
   },
   {

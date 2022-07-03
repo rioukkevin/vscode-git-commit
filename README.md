@@ -10,6 +10,10 @@ This extension is an extension made to formalize git commit messages. By using a
 
 By example: When you want to specify a **scope** in your commits, you can create a variable named scope in th e template like this `{scope}`
 
+## Default values
+
+### Default select
+
 If you want to specify which data you want in this scope variable, you can specify it with the variable settings
 
 ```json
@@ -28,9 +32,19 @@ If you want to specify which data you want in this scope variable, you can speci
 }
 ```
 
-I show you more on the #Settings part
+### Default string
 
-<zz>toto</zz>
+by submitting a string variable instead of an array, this will open the prompt with the default value you put
+
+```json
+{
+  "message": "[skip ci]"
+}
+```
+
+will prefill the prompt with this value.
+
+I show you more on the #Settings part
 
 ## How to use it ?
 
