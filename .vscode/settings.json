@@ -39,6 +39,9 @@
       }
     ]
   },
+  "vscodeGitCommit.defaultVariablesValues": {
+    "scope": "😉"
+  },
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#e36b61",
     "activityBar.activeBorder": "#136c1a",

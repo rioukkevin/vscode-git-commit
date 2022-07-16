@@ -6,6 +6,7 @@ import { IconButton } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
 import VariableMergeInput from './core/VariableMergeInput';
 import { Store } from '../utils/store';
+import VariableBranchInput from './core/VariableBranchInput';
 
 interface IProps {
   name: string;
@@ -17,13 +18,13 @@ const VariableInputElementCustom: FC<IProps> = (props) => {
 
   const { variables, setVariable } = useContext(Store);
 
-  const [type, setType] = useState<'array' | 'merge'>('array');
+  const [type, setType] = useState<'array' | 'merge' | 'branch'>('array');
 
   const mergeItemsWithoutSelf = mergeItems.filter((a) => a !== name);
 
   // Update from bottom
   const handleChangeType = (e: any) => {
-    const newVal = e.target.value as 'array' | 'merge';
+    const newVal = e.target.value as 'array' | 'merge' | 'branch';
     setType(newVal);
     setVariable(name, []);
   };
@@ -47,6 +48,7 @@ const VariableInputElementCustom: FC<IProps> = (props) => {
           >
             <option value="array">Array</option>
             <option value="merge">Merge</option>
+            <option value="branch">Branch</option>
           </Select>
           <IconButton
             className={styles.deleteIcon}
@@ -62,6 +64,7 @@ const VariableInputElementCustom: FC<IProps> = (props) => {
         </div>
         <div className={styles.contentRight}>
           {type === 'array' && <VariableArrayInput name={name} />}
+          {type === 'branch' && <VariableBranchInput name={name} />}
           {type === 'merge' && (
             <VariableMergeInput
               mergeItems={mergeItemsWithoutSelf}

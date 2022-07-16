@@ -46,6 +46,7 @@ const SelectString: FC<IProps> = (props) => {
       <IconButton
         className={styles.deleteIcon}
         aria-label="copy"
+        disabled={selected === ''}
         icon={<DeleteIcon />}
         color="#000000"
         backgroundColor="#EEF2F6"
