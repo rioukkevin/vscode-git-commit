@@ -3,6 +3,7 @@
 #### **3.0.2** (_07-16-2022_)
 
 - ✨feature: ability to define default value for free text inputs
+- ✨feature: add repo current branch in variables
 
 #### **3.0.1** (_02-24-2022_)
 

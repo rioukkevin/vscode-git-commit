@@ -102,20 +102,20 @@ For each variables defined in the template above, you can define the content:
   - the value startWith 'files' -> An array of files with defined status is displayed as choices
   - the value looks like '<<something>>...<<something_else>>' -> a merge of array between the variable 'something' and 'something_else' is created as choices
 
-#### If you write your own Array:
+#### If you write your own Array
 
 - The 'detail' property is optionnal
 - The 'label' property is used as the content include in template
 - (For old users) The 'id' property is now automatically generated and not used anymore by the extension
 
-#### If you want predefined choices:
+#### If you want predefined choices
 
 - 'keke' is the prefix I use personnally
 - 'angular' is prefix specific to angular repos (HELP: if someone has a full config for angular commits, can you share it with me by creating a PR or Issue ?)
 - 'alpha8' is prefix we used in the enterprise where I work
 - 'semantic' is an other normalization of prefix but I lost the link associated :/
 
-#### If you want to list files many possibilities are yours:
+#### If you want to list files many possibilities are yours
 
 - 'files': All staged and changed files
 - 'files.deleted': All deleted staged and changed files
@@ -129,6 +129,10 @@ For each variables defined in the template above, you can define the content:
 - 'files.changed.deleted': All deleted changed files
 - 'files.changed.modified': All modified changed files
 - 'files.changed.added': All added changed files
+
+#### If you want to add branch name in commit, you can use this
+
+'branch': Show you a select with the choice between short and long name for current branch
 
 # Contributing to the extension
 
@@ -145,6 +149,7 @@ You just have to create a pull-request 😉 with what you want and a clear descr
 #### **3.0.2** (_07-16-2022_)
 
 - ✨feature: ability to define default value for free text inputs
+- ✨feature: add repo current branch in variables
 
 #### **3.0.1** (_02-24-2022_)
 

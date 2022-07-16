@@ -1,6 +1,7 @@
 import { Repository, Status } from '../typings/git';
 import { IQuickPickSettings } from '../typings/quickPick';
 import { getFiles, getStagedFiles, getUnstagedFiles } from '../utils/files';
+import { getCurrentBranch } from '../utils/git';
 import { QUICKPICKITEMSUNDEFINED } from './constants';
 
 export const dynamicsAggregation: {
@@ -18,6 +19,7 @@ export const dynamicsAggregation: {
   'files.changed.deleted': getUnstagedFiles(Status.DELETED),
   'files.changed.modified': getUnstagedFiles(Status.MODIFIED),
   'files.changed.added': getUnstagedFiles(Status.INTENT_TO_ADD),
+  branch: getCurrentBranch,
 };
 
 export const getDynamicPreset = (

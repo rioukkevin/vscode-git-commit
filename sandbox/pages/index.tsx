@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Heading } from '@chakra-ui/react';
+import { Heading, Link } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
@@ -10,6 +10,7 @@ import ReactMarkdown from 'react-markdown';
 
 import { doc } from '../generated/doc.md';
 import * as customs from '../components/md';
+import { Menu } from '../components/core/Menu';
 
 const TITLE = 'Home - VSCode Git commit message';
 const DESCRIPTION =
@@ -47,6 +48,7 @@ const Home: NextPage = () => {
           <img src="/logo.png" alt="logo" className={styles.logo} /> Git commit
           message
         </Heading>
+        <Menu />
         <ReactMarkdown
           components={{
             ...ChakraUIRenderer(),
