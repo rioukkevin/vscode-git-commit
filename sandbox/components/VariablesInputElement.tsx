@@ -6,6 +6,7 @@ import VariableMergeInput from './core/VariableMergeInput';
 import VariablePredefinedInput from './core/VariablePredefinedInput';
 import { Store } from '../utils/store';
 import VariableFileInput from './core/VariableFileInput';
+import VariableBranchInput from './core/VariableBranchInput';
 
 interface IProps {
   name: string;
@@ -19,7 +20,7 @@ const VariableInputElement: FC<IProps> = (props) => {
   const value = variables[name];
 
   const [type, setType] = useState<
-    'string' | 'array' | 'merge' | 'predefined' | 'files'
+    'string' | 'array' | 'merge' | 'predefined' | 'files' | 'branch'
   >('string');
 
   const mergeItemsWithoutSelf = mergeItems.filter((a) => a !== name);
@@ -31,7 +32,8 @@ const VariableInputElement: FC<IProps> = (props) => {
       | 'array'
       | 'merge'
       | 'predefined'
-      | 'files';
+      | 'files'
+      | 'branch';
     setType(newVal);
     if (newVal === 'string' || newVal === 'predefined' || newVal === 'files') {
       setVariable(name, undefined);
@@ -42,7 +44,9 @@ const VariableInputElement: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (typeof value === 'string') {
-      if (value.startsWith('files')) {
+      if (value === 'branch') {
+        setType('branch');
+      } else if (value.startsWith('files')) {
         setType('files');
       } else {
         setType('predefined');
@@ -74,6 +78,7 @@ const VariableInputElement: FC<IProps> = (props) => {
             <option value="merge">Merge</option>
             <option value="predefined">Predefined</option>
             <option value="files">Files</option>
+            <option value="branch">Branch</option>
           </Select>
         </div>
         <div className={styles.contentRight}>
@@ -86,6 +91,7 @@ const VariableInputElement: FC<IProps> = (props) => {
           )}
           {type === 'predefined' && <VariablePredefinedInput name={name} />}
           {type === 'files' && <VariableFileInput name={name} />}
+          {type === 'branch' && <VariableBranchInput name={name} />}
         </div>
       </div>
     </>

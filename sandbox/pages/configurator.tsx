@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { Heading } from '@chakra-ui/react';
+import { Heading, Link } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import React from 'react';
 import CanvasTitle from '../components/CanvasTitle';
 import CodeTitle from '../components/CodeTitle';
+import { Menu } from '../components/core/Menu';
+import DefaultVariablesValuesInput from '../components/DefaultVariablesValuesInput';
+import DefaultVariablesValuesRenderer from '../components/DefaultVariablesValuesRenderer';
 import InsertionModeInput from '../components/InsertionModeInput';
 import InsertionModeRenderer from '../components/InsertionModeRenderer';
 import TemplateInput from '../components/TemplateInput';
@@ -55,6 +58,7 @@ const Configurator: NextPage = () => {
               <img src="/logo.png" alt="logo" className={styles.logo} /> Git
               commit message configurator
             </Heading>
+            <Menu />
             <p className={styles.presentation}>
               This website as goal to generate settings for{' '}
               <a href="https://marketplace.visualstudio.com/items?itemName=rioukkevin.vscode-git-commit">
@@ -112,6 +116,17 @@ const Configurator: NextPage = () => {
           <div className={styles.right}>
             <CodeTitle title="Variables" />
             <VariablesRenderer />
+          </div>
+        </div>
+        <div className={styles.line}>
+          <div className={styles.left}>
+            <CanvasTitle title="Default variables values" />
+            <p className={styles.default}>DEFAULT: {'{}'}</p>
+            <DefaultVariablesValuesInput />
+          </div>
+          <div className={styles.right}>
+            <CodeTitle title="Default variables values" />
+            <DefaultVariablesValuesRenderer />
           </div>
         </div>
       </main>

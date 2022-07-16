@@ -1,5 +1,6 @@
 import { window, extensions } from 'vscode';
 import { GitExtension, Repository } from '../typings/git';
+import { IQuickPickSettings } from '../typings/quickPick';
 import { getMode } from './settings';
 
 function getGitExtension() {
@@ -30,4 +31,22 @@ export const setGitMessage = (repo: Repository, msg: string): void => {
   } else {
     repo.inputBox.value = msg;
   }
+};
+
+export const getCurrentBranch = (repo: Repository): IQuickPickSettings[] => {
+  const branch = repo.state.HEAD?.upstream?.name;
+  const repository = repo.rootUri.path.split('/').pop();
+  return [
+    {
+      label: branch ?? 'Branch not found',
+      detail: '',
+    },
+    {
+      label:
+        !!branch || !!repository
+          ? `${repository}/${branch}`
+          : 'Repo / Branch not found',
+      detail: '',
+    },
+  ];
 };

@@ -2,7 +2,11 @@ import { Repository } from '../typings/git';
 import { IQuickPickSettings } from '../typings/quickPick';
 import { useQuickPick, useQuickText } from '../utils/actions';
 import { setGitMessage } from '../utils/git';
-import { getTemplate, getVariables } from '../utils/settings';
+import {
+  getDefaultVariablesValues,
+  getTemplate,
+  getVariables,
+} from '../utils/settings';
 import {
   templateParser,
   templateSerialize,
@@ -26,7 +30,11 @@ export const execute = async (repo: Repository) => {
       value: '',
     };
     if (!variableValue) {
+      const defaultValuesSettings = getDefaultVariablesValues();
+      const defaultValue = defaultValuesSettings[v];
+
       result.value = await useQuickText({
+        value: defaultValue,
         ignoreFocusOut: true,
         placeHolder: `Please type the value for <${v}>`,
       });
