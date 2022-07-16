@@ -4,7 +4,6 @@ node_modules
 package-lock.json
 assets/logo.pdn
 assets/logoold.png
-yarn.lock
 /vscode-git-commit-*.vsix
 /yarn-error.log
 assets/Preview/
