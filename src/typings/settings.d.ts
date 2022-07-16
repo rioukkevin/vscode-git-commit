@@ -5,3 +5,9 @@ type ISettingVariable = string | IQuickPickSettings[];
 type ISettingVariables = {
   [key: string]: ISettingVariable;
 };
+
+type ISettingDefaultVariablesValue = string;
+
+type ISettingDefaultVariablesValues = {
+  [key: string]: ISettingDefaultVariablesValue;
+};

@@ -1,0 +1,33 @@
+.container {
+  border-radius: 3px;
+  margin: 10px 0px;
+  display: flex;
+  justify-content: stretch;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.container:first-child {
+  margin-top: 0;
+}
+
+.input {
+  width: 100%;
+}
+
+.name {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.disabled {
+  font-weight: 400;
+  text-transform: none;
+  font-size: small;
+  color: #db4437;
+}
+
+.deleteIcon {
+  margin-left: 5px;
+}
