@@ -11,3 +11,9 @@ type ISettingDefaultVariablesValue = string;
 type ISettingDefaultVariablesValues = {
   [key: string]: ISettingDefaultVariablesValue;
 };
+
+type ISettingVariablesDisplayTitle = string | undefined;
+
+type ISettingVariablesDisplayTitles = {
+  [key: string]: ISettingVariablesDisplayTitle;
+};

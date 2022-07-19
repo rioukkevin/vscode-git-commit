@@ -5,6 +5,7 @@ import { setGitMessage } from '../utils/git';
 import {
   getDefaultVariablesValues,
   getTemplate,
+  getVariableDisplayTitles,
   getVariables,
 } from '../utils/settings';
 import {
@@ -21,8 +22,13 @@ export const execute = async (repo: Repository) => {
 
   const variablesReplacement: TVariable[] = [];
 
+  const variablesDisplayTitles = getVariableDisplayTitles();
+
   for (let i = 0; i < variables.length; i++) {
     const v = variables[i];
+
+    const title = variablesDisplayTitles[v];
+
     const variablesSettings = getVariables();
     const variableValue = variablesSettings[v];
     let result = {
@@ -31,10 +37,14 @@ export const execute = async (repo: Repository) => {
     };
     if (!variableValue) {
       const defaultValuesSettings = getDefaultVariablesValues();
-      const defaultValue = defaultValuesSettings[v];
+      const defaultValue: string | undefined = defaultValuesSettings[v];
 
       result.value = await useQuickText({
-        value: defaultValue,
+        title,
+        prompt: !!defaultValue
+          ? `The default value is: "${defaultValue}"`
+          : undefined,
+        value: defaultValue ?? '',
         ignoreFocusOut: true,
         placeHolder: `Please type the value for <${v}>`,
       });
@@ -42,6 +52,7 @@ export const execute = async (repo: Repository) => {
       const choices: IQuickPickSettings[] = parseVariable(repo, v);
       result.value = await useQuickPick(
         {
+          title,
           ignoreFocusOut: true,
           placeHolder: `Please select a value for <${v}>`,
         },

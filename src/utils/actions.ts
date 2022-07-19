@@ -19,9 +19,9 @@ export const useQuickText = async (
   params: InputBoxOptions
 ): Promise<string> => {
   const message = await window.showInputBox(params);
-  if (!message) {
+  if (message === undefined) {
     konsole.error('Message is cancel');
-    throw new Error('Empty');
+    throw new Error('Canceled');
   }
   return message;
 };

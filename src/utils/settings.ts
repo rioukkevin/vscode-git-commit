@@ -3,6 +3,8 @@ import { EXTENSION_NAME } from '../config/const';
 import {
   ISettingDefaultVariablesValues,
   ISettingVariables,
+  ISettingVariablesDisplayTitle,
+  ISettingVariablesDisplayTitles,
 } from '../typings/settings';
 
 export const getMode = (): string | undefined => {
@@ -31,4 +33,11 @@ export const getDefaultVariablesValues = (): ISettingDefaultVariablesValues => {
     .getConfiguration(EXTENSION_NAME)
     .get('defaultVariablesValues');
   return variables as ISettingDefaultVariablesValues;
+};
+
+export const getVariableDisplayTitles = (): ISettingVariablesDisplayTitles => {
+  let variables: ISettingVariablesDisplayTitles | undefined = workspace
+    .getConfiguration(EXTENSION_NAME)
+    .get('variablesDisplayTitles');
+  return variables as ISettingVariablesDisplayTitles;
 };
