@@ -21,10 +21,12 @@ export const DEFAULT_VALUE: IStore = {
   template: DEFAULT_TEMPLATE,
   variables: {},
   defaultVariablesValues: {},
+  variablesDisplayTitles: {},
   insertionMode: false,
   setVariable: () => [],
   setTemplate: () => [],
   setDefaultVariableValue: () => '',
+  setVariableDisplayTitle: () => '',
   setInsertionMode: () => false,
 };
 
@@ -38,6 +40,9 @@ export const StoreProvider: FC<any> = (props) => {
   const [insertionMode, setInsertionModeState] = useState(true);
   const [defaultVariablesValues, setDefaultVariablesValuesState] = useState<
     IStore['defaultVariablesValues']
+  >({});
+  const [variablesDisplayTitles, setVariablesDisplayTitlesState] = useState<
+    IStore['variablesDisplayTitles']
   >({});
 
   const setTemplate: IStore['setTemplate'] = (value) => {
@@ -62,6 +67,17 @@ export const StoreProvider: FC<any> = (props) => {
     value
   ) => {
     setDefaultVariablesValuesState((oldValue) => ({
+      ...oldValue,
+      [name]: value,
+    }));
+    return value;
+  };
+
+  const setVariableDisplayTitle: IStore['setVariableDisplayTitle'] = (
+    name,
+    value
+  ) => {
+    setVariablesDisplayTitlesState((oldValue) => ({
       ...oldValue,
       [name]: value,
     }));
@@ -106,10 +122,12 @@ export const StoreProvider: FC<any> = (props) => {
         template,
         variables,
         insertionMode,
+        variablesDisplayTitles,
         defaultVariablesValues,
         setTemplate,
         setVariable,
         setDefaultVariableValue,
+        setVariableDisplayTitle,
         setInsertionMode,
       }}
     >

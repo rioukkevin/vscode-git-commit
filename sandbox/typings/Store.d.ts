@@ -9,6 +9,7 @@ export type IStoreVariableCustom = IStoreVariable[];
 export type IStoreVariableMerge = string[];
 export type IStoreVariablePredefined = string;
 export type IStoreDefaultVariableValue = string | undefined;
+export type IStoreVariableDisplayTitle = string | undefined;
 
 type IStoreVariableValue =
   | IStoreVariableCustom
@@ -24,12 +25,17 @@ export interface IStoreDefaultVariablesValues {
   [key: string]: IStoreDefaultVariableValue;
 }
 
+export interface IStoreVariablesDisplayTitles {
+  [key: string]: IStoreVariableDisplayTitle;
+}
+
 export type IStoreTemplate = Descendant[];
 
 export interface IStoreData {
   template: IStoreTemplate;
   variables: IStoreVariables;
   defaultVariablesValues: IStoreDefaultVariablesValues;
+  variablesDisplayTitles: IStoreVariablesDisplayTitles;
   insertionMode: boolean;
 }
 
@@ -43,5 +49,9 @@ export interface IStore extends IStoreData {
     name: string,
     value: IStoreDefaultVariableValue
   ) => IStoreDefaultVariableValue;
+  setVariableDisplayTitle: (
+    name: string,
+    value: IStoreVariableDisplayTitle
+  ) => IStoreVariableDisplayTitle;
   setInsertionMode: (value: boolean) => boolean;
 }

@@ -33,7 +33,7 @@ You can define dynamic content by using _{_ & _}_ in doc, I called it a variable
 
 When triggering this extension, a value for each variable is prompt.
 
-### **Use select or text for each variables** (`vscodeGitCommit.messageTemplate`)
+### **Use select or text for each variables** (`vscodeGitCommit.variables`)
 
 ```json
 {
@@ -92,3 +92,31 @@ For each variables defined in the template above, you can define the content:
 #### If you want to add branch name in commit, you can use this
 
 'branch': Show you a select with the choice between short and long name for current branch
+
+### **Define some default values for free input variables** (`vscodeGitCommit.defaultVariablesValues`)
+
+```json
+{
+  "vscodeGitCommit.defaultVariablesValues": {
+    "author": "@RIOU Kevin"
+  }
+}
+```
+
+For each variables defined in the template not used in `variables` setting, you can define a default value pretyped in the input
+
+In the upside example, for the variable `author`, the input is prefill with `@RIOU Kevin`.
+
+### **Define titles display on the input** (`vscodeGitCommit.variablesDisplayTitles`)
+
+```json
+{
+  "vscodeGitCommit.variablesDisplayTitles": {
+    "author": "Fill the pseudo of the person commiting with an @"
+  }
+}
+```
+
+For each variables prompt, you can define a default value pretyped in the input
+
+In the upside example, for the variable `author`, the input will show the title `Fill the pseudo of the person commiting with an @`.

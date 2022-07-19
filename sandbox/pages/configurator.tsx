@@ -13,6 +13,8 @@ import InsertionModeInput from '../components/InsertionModeInput';
 import InsertionModeRenderer from '../components/InsertionModeRenderer';
 import TemplateInput from '../components/TemplateInput';
 import TemplateRenderer from '../components/TemplateRenderer';
+import VariablesDisplayTitlesInput from '../components/VariablesDisplayTitlesInput';
+import VariablesDisplayTitlesRenderer from '../components/VariablesDisplayTitlesRenderer';
 import VariableInput from '../components/VariablesInput';
 import VariablesRenderer from '../components/VariablesRenderer';
 import styles from '../styles/Configurator.module.css';
@@ -127,6 +129,17 @@ const Configurator: NextPage = () => {
           <div className={styles.right}>
             <CodeTitle title="Default variables values" />
             <DefaultVariablesValuesRenderer />
+          </div>
+        </div>
+        <div className={styles.line}>
+          <div className={styles.left}>
+            <CanvasTitle title="Variables display titles" />
+            <p className={styles.default}>DEFAULT: {'{}'}</p>
+            <VariablesDisplayTitlesInput />
+          </div>
+          <div className={styles.right}>
+            <CodeTitle title="Variables display titles" />
+            <VariablesDisplayTitlesRenderer />
           </div>
         </div>
       </main>
