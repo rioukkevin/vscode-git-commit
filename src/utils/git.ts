@@ -19,7 +19,8 @@ export const getRepo = (repoUri: string): Repository | false => {
   }
   let repos: Repository[] = gitExtension.getAPI(1).repositories;
   const repo = repos.find(
-    (e) => e._repository.repository.repositoryRoot === repoUri
+    (e) => e.rootUri.toString() === repoUri
+    // (e) => e._repository.repository.repositoryRoot === repoUri
   );
   return repo || repos[0];
 };
