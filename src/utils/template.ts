@@ -22,5 +22,5 @@ export const templateSerialize = (
     const e = data[i];
     newTemplate = newTemplate.replace(`{${e.key}}`, e.value);
   }
-  return newTemplate;
+  return newTemplate.trim();
 };
