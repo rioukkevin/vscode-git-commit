@@ -1,5 +1,9 @@
 # Changelog
 
+#### **3.1.0** (_08-05-2022_)
+
+- 🐞fix: update for vscode api change in 1.70 about repositories
+
 #### **3.0.2** (_07-16-2022_)
 
 - ✨feature: ability to define default value for free text inputs
