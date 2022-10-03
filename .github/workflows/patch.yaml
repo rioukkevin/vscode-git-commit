@@ -13,25 +13,43 @@ jobs:
     name: extension
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout
         uses: actions/checkout@v2
 
-      - name: fetch all history and tags from all branches for gitversion
+      - name: Fetch
         run: git fetch --prune --unshallow
 
-      - name: setup node
+      - name: Setup node 16.x
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
 
-      - name: setup yarn
+      - name: Setup yarn
         run: npm i -g yarn
 
-      - name: setup dependencies
+      - name: Setup dependencies
         run: yarn
 
-      - name: update markdown
-        run: yarn md
+      - name: Combine markdowns
+        run: yarn md:concatenate
 
-      - name: update markdown
-        run: yarn version
+      - name: Export version
+        id: version
+        run: echo "::set-output name=new::1.0.0"
+
+      - name: Use version
+        run: echo "${{steps.version.new}}"
+
+      # Update version number
+
+      - name: Build Sources
+        run: yarn extension:build
+
+      # - name: Compile VSIX
+      #   run: yarn extension:pack
+
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: vscode-git-commit-3.1.1.vsix
+      #     path: ${{github.workspace}}/vscode-git-commit-3.1.1.vsix
