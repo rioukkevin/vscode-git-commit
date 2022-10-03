@@ -26,30 +26,9 @@
   //   }
   // ]
   "vscodeGitCommit.insertMode": "Concatenate",
-  "vscodeGitCommit.template": [
-    "{action} ({sujet}): {message}",
-    "Signature: {nom}"
-  ],
+  "vscodeGitCommit.template": ["{feat} ({scope}): {message}"],
   "vscodeGitCommit.variables": {
-    "sujet": [
-      {
-        "label": "Oxidya",
-        "detail": "Best streameuse RL"
-      },
-      {
-        "label": "Amphirae"
-      },
-      {
-        "label": "PoaChimpa"
-      }
-    ],
-    "action": "keke",
-    "nom": [
-      {
-        "label": "Kevin",
-        "detail": "Mon nom"
-      }
-    ]
+    "feat": "alpha8"
   },
   "vscodeGitCommit.defaultVariablesValues": {
     "scope": "😉"

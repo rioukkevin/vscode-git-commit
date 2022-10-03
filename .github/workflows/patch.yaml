@@ -1,0 +1,37 @@
+on:
+  push:
+    branches:
+      - master
+    paths-ignore: # dont run when changes made to these folders
+      - '.vscode/**'
+      - 'sandbox/**'
+      - 'share/**'
+      - 'scripts/**'
+
+jobs:
+  extension:
+    name: extension
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: fetch all history and tags from all branches for gitversion
+        run: git fetch --prune --unshallow
+
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+
+      - name: setup yarn
+        run: npm i -g yarn
+
+      - name: setup dependencies
+        run: yarn
+
+      - name: update markdown
+        run: yarn md
+
+      - name: update markdown
+        run: yarn version
