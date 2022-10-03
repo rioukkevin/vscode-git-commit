@@ -26,16 +26,28 @@
   //   }
   // ]
   "vscodeGitCommit.insertMode": "Concatenate",
-
+  "vscodeGitCommit.template": [
+    "{action} ({sujet}): {message}",
+    "Signature: {nom}"
+  ],
   "vscodeGitCommit.variables": {
-    "prefix": "alpha8",
-    "aliases": [
+    "sujet": [
       {
-        "label": "🚀 Space",
-        "detail": "Choose when pushing in canary at SpaceX"
+        "label": "Oxidya",
+        "detail": "Best streameuse RL"
       },
       {
-        "label": "😝 Easter-Egg"
+        "label": "Amphirae"
+      },
+      {
+        "label": "PoaChimpa"
+      }
+    ],
+    "action": "keke",
+    "nom": [
+      {
+        "label": "Kevin",
+        "detail": "Mon nom"
       }
     ]
   },
