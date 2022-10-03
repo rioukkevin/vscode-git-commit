@@ -2,7 +2,7 @@
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
   "description": "Harmonize your git commit message with your colleagues",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -161,27 +161,35 @@
   },
   "scripts": {
     "compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -watch -p ./",
     "md:concatenate": "node ./scripts/mdConcatenate.js",
     "md:copy": "node ./scripts/mdCopySandbox.js && rm -rf ./sandbox/public/assets || true && cp -R ./assets ./sandbox/public/assets",
     "md": "yarn md:concatenate && yarn md:copy",
-    "extension:prepublish": "npm run extension:compile",
+    "semver": "node ./scripts/semver",
+    "semver:patch": "yarn semver",
+    "semver:minor": "yarn semver -t minor",
+    "semver:major": "yarn semver -t major",
+    "version": "node ./scripts/version",
+    "extension:rm": "rm -f ./vscode-git-commit-3.1.0.vsix",
     "extension:build": "yarn md:concatenate && tsc -p ./",
-    "extension:lint": "eslint src --ext ts --fix",
     "extension:pack": "vsce package",
-    "extension:rm": "rm -f ./vscode-git-commit-3.0.3.vsix",
-    "extension:install": "code --install-extension vscode-git-commit-3.1.0.vsix",
-    "extension:pretest": "npm run extension:compile && npm run lint",
-    "extension:local": "yarn extension:rm && yarn extension:build && yarn extension:pack && yarn extension:install"
+    "extension:install": "code --install-extension vscode-git-commit-3.1.1.vsix",
+    "extension:local": "yarn extension:rm && yarn extension:build && yarn extension:pack && yarn extension:install",
+    "extension:lint": "eslint src --ext ts --fix"
   },
   "devDependencies": {
+    "@types/cli-color": "^2.0.2",
+    "@types/commander": "^2.12.2",
     "@types/node": "^12.12.0",
     "@types/semver": "^7.3.9",
     "@types/vscode": "^1.34.0",
     "@typescript-eslint/eslint-plugin": "^4.16.0",
     "@typescript-eslint/parser": "^4.16.0",
+    "args-parser": "^1.3.0",
+    "cli-color": "^2.0.3",
+    "commander": "^9.4.1",
     "eslint": "^7.21.0",
+    "package-json-editor": "^1.0.1",
     "typescript": "^4.2.2"
   },
   "dependencies": {

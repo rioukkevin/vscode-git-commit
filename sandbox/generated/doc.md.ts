@@ -174,6 +174,12 @@ You just have to create a pull-request 😉 with what you want and a clear descr
 
 # Changelog
 
+#### **3.1.1** (_09-30-2022_)
+
+- ✨feature: Trim messages when finished
+- ✨feature: Ability to define titles on prompts
+- ✨feature: Ability to define default values on prompts
+
 #### **3.1.0** (_08-05-2022_)
 
 - 🐞fix: update for vscode api change in 1.70 about repositories
