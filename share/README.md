@@ -2,6 +2,8 @@
 
 ## Table of content
 
+- [Default template](./default.md)
+- [CaioMizerkowski](./caiomizerkowski.md)
 - [Wilson Mar template by jycouet](./wilsonmar.md)
 
 ## Template for examples
