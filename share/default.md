@@ -1,7 +1,7 @@
 # Git message template (default)
 
 Added by: [Diogo-Rossi](https://github.com/Diogo-Rossi)
-Source: [Source](./default.json)
+Source: [Default](./default.json)
 
 Settings:
 
