@@ -5,6 +5,7 @@
 - [Default template](./default.md)
 - [CaioMizerkowski](./caiomizerkowski.md)
 - [Wilson Mar template by jycouet](./wilsonmar.md)
+- [Diogo Rossi](./diogorossi.md)
 
 ## Template for examples
 
