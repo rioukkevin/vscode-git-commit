@@ -1,4 +1,4 @@
-# Git message template (Wilson Mar)
+# Git message template (Diogo-Rossi)
 
 Added by: [Diogo-Rossi](https://github.com/Diogo-Rossi)
 Source: [Gist](https://gist.github.com/Diogo-Rossi/79f39b5982c7c6eb8a32c5871c926b75)
