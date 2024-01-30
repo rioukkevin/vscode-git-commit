@@ -1,9 +1,5 @@
 ![demo](./assets/demo.gif)
 
-![version](https://vsmarketplacebadge.apphb.com/version-short/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
-![install](https://vsmarketplacebadge.apphb.com/installs/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
-![rating](https://vsmarketplacebadge.apphb.com/rating-star/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
-
 # What is it ?
 
 This extension is an extension made to formalize git commit messages. By using a template and variables, you can define how the commit message needs to looks and which data you want in this message.
@@ -172,6 +168,12 @@ You can share the config you made for you by creating a pull request, in the fol
 You just have to create a pull-request 😉 with what you want and a clear description of the goal of your feature
 
 # Changelog
+
+#### **3.2.0** (_01-30-2024_)
+
+- ✨feature: Trim messages when finished
+- ✨feature: Ability to define titles on prompts
+- ✨feature: Ability to define default values on prompts
 
 #### **3.1.1** (_09-30-2022_)
 

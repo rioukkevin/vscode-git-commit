@@ -2,7 +2,7 @@
   "name": "vscode-git-commit",
   "displayName": "VSCode Git Commit Message",
   "description": "Harmonize your git commit message with your colleagues",
-  "version": "3.1.1",
+  "version": "3.2.0",
   "engines": {
     "vscode": "^1.60.0"
   },

@@ -1,5 +1,11 @@
 # Changelog
 
+#### **3.2.0** (_01-30-2024_)
+
+- ✨feature: Trim messages when finished
+- ✨feature: Ability to define titles on prompts
+- ✨feature: Ability to define default values on prompts
+
 #### **3.1.1** (_09-30-2022_)
 
 - ✨feature: Trim messages when finished

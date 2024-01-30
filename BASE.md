@@ -1,9 +1,5 @@
 ![demo](./assets/demo.gif)
 
-![version](https://vsmarketplacebadge.apphb.com/version-short/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
-![install](https://vsmarketplacebadge.apphb.com/installs/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
-![rating](https://vsmarketplacebadge.apphb.com/rating-star/rioukkevin.vscode-git-commit.svg?style=for-the-badge&color=dd4739)
-
 # What is it ?
 
 This extension is an extension made to formalize git commit messages. By using a template and variables, you can define how the commit message needs to looks and which data you want in this message.
