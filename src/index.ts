@@ -19,7 +19,7 @@ export function activate(context: ExtensionContext) {
     'vscodeGitCommit.setMessage',
     (params) => {
       commands.executeCommand('workbench.view.scm');
-      const repoUri = params.rootUri.toString();
+      const repoUri = params?.rootUri?.toString() || undefined;
         // params?._quickDiffProvider?.repository?.repositoryRoot || undefined;
       let repo: Repository | false = getRepo(repoUri);
       if (!!repo) {
