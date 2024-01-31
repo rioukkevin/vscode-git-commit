@@ -1,4 +1,4 @@
-import { window, extensions } from 'vscode';
+import { window, extensions, Uri } from 'vscode';
 import { GitExtension, Repository } from '../typings/git';
 import { IQuickPickSettings } from '../typings/quickPick';
 import { getMode } from './settings';
@@ -22,6 +22,9 @@ export const getRepo = (repoUri: string): Repository | false => {
     (e) => e.rootUri.toString() === repoUri
     // (e) => e._repository.repository.repositoryRoot === repoUri
   );
+  if (!repo && window.activeTextEditor) {
+    return getRepoContainingFile(window.activeTextEditor.document.uri, repos);
+  }
   return repo || repos[0];
 };
 
@@ -51,3 +54,33 @@ export const getCurrentBranch = (repo: Repository): IQuickPickSettings[] => {
     },
   ];
 };
+
+/**
+ * Get the repository that contains the specified file.
+ * @param fileUri The uri of the file.
+ * @returns The repository containing the file, or false if no known repository contains the file.
+ */
+export function getRepoContainingFile(fileUri: Uri, repos: Repository[]) {
+  let repoUris = repos.map((rep) => rep.rootUri),
+    repo = null;
+  for (let i = 0; i < repoUris.length; i++) {
+    if (
+      fileUri
+        .toString()
+        .startsWith(pathWithTrailingSlash(repoUris[i].toString())) &&
+      (repo === null ||
+        repo.rootUri.toString().length < repoUris[i].toString().length)
+    )
+      repo = repos[i];
+  }
+  return repo || false;
+}
+
+/**
+ * Get the path with a trailing slash.
+ * @param path The path.
+ * @returns The path with a trailing slash.
+ */
+export function pathWithTrailingSlash(path: string) {
+  return path.endsWith('/') ? path : path + '/';
+}
